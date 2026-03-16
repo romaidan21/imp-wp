@@ -55,6 +55,13 @@ if (defined('WP_DEBUG') && WP_DEBUG && !function_exists('local_debug')) {
   }
 }
 
-if (function_exists('local_debug')) {
-  local_debug();
+// Run local debug helper only when explicitly requested, so it cannot break REST responses.
+if (
+  function_exists('local_debug')
+) {
+  try {
+    local_debug();
+  } catch (Throwable $e) {
+    error_log('local_debug() failed: ' . $e->getMessage());
+  }
 }
