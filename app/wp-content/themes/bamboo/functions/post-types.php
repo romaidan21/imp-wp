@@ -1,86 +1,83 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php if (!defined('ABSPATH')) exit;
 
-// add_action('init', 'createBamooCustomPosts');
-// add_action('init', 'removeDefaultPostType');
-// add_action('admin_init', 'remove_fse_on_page_type');
+add_action('init', 'createBamooCustomPosts');
+add_action('init', 'removeDefaultPostType');
+add_action('admin_init', 'remove_fse_on_page_type');
 
 function createBamooCustomPosts()
 {
-    register_post_type('articles', [
-        'labels'        => [
-            'name'           => __('Articles', 'bamboo'),
-            'all_items'      => __('All articles', 'bamboo'),
-            'name_admin_bar' => __('Articles', 'bamboo'),
-            'singular_name'  => __('Article', 'bamboo'),
-            'add_new'        => __('Add article', 'bamboo'),
-            'add_new_item'   => __('Add article', 'bamboo')
-        ],
-        'public'        => true,
-        'has_archive'   => true,
-        'show_in_rest'  => true,
-        'menu_position' => 4,
-        'menu_icon'     => 'dashicons-admin-post',
-        'supports'      => ['title', 'editor', 'excerpt', 'thumbnail', 'author']
-    ]);
+  register_post_type('blog', [
+    'labels'        => [
+      'name'           => __('Блог', 'bamboo'),
+      'all_items'      => __('Усі статті', 'bamboo'),
+      'name_admin_bar' => __('Блог', 'bamboo'),
+      'singular_name'  => __('Стаття', 'bamboo'),
+      'add_new'        => __('Додати статтю', 'bamboo'),
+      'add_new_item'   => __('Додати статтю', 'bamboo')
+    ],
+    'public'        => true,
+    'has_archive'   => true,
+    'show_in_rest'  => true,
+    'menu_position' => 4,
+    'menu_icon'     => 'dashicons-admin-post',
+    'supports'      => ['title', 'editor', 'excerpt', 'thumbnail', 'author']
+  ]);
 
-    register_taxonomy('articles_category', ['articles'], [
-        'labels' => [
-            'name' => 'Categories articles',
-        ],
-        'publicly_queryable' => false,
-        'show_admin_column' => true,
-        'public'            => true,
-        'hierarchical'      => true,
-        'show_in_rest'      => true,
-    ]);
+  register_taxonomy('blog_category', ['blog'], [
+    'labels' => [
+      'name' => 'Категорії статей',
+    ],
+    'publicly_queryable' => false,
+    'show_admin_column' => true,
+    'public'            => true,
+    'hierarchical'      => true,
+    'show_in_rest'      => true,
+  ]);
 
-    register_taxonomy('articles_tag', ['articles'], [
-        'labels' => [
-            'name'           => __('Tags articles','bamboo'),
-            'all_items'      => __('All Tags', 'bamboo'),
-            'name_admin_bar' => __('Tags', 'bamboo'),
-            'singular_name'  => __('Tag', 'bamboo'),
-            'add_new'        => __('Add Tag', 'bamboo'),
-            'add_new_item'   => __('Add Tag', 'bamboo')
-        ],
-        'publicly_queryable' => false,
-        'show_admin_column' => true,
-        'public'            => true,
-        'hierarchical'      => true,
-        'show_in_rest'      => true,
-    ]);
-
-
+  // register_taxonomy('articles_tag', ['articles'], [
+  //   'labels' => [
+  //     'name'           => __('Tags articles', 'bamboo'),
+  //     'all_items'      => __('All Tags', 'bamboo'),
+  //     'name_admin_bar' => __('Tags', 'bamboo'),
+  //     'singular_name'  => __('Tag', 'bamboo'),
+  //     'add_new'        => __('Add Tag', 'bamboo'),
+  //     'add_new_item'   => __('Add Tag', 'bamboo')
+  //   ],
+  //   'publicly_queryable' => false,
+  //   'show_admin_column' => true,
+  //   'public'            => true,
+  //   'hierarchical'      => true,
+  //   'show_in_rest'      => true,
+  // ]);
 }
 
 /*** Remove Default Post Type ***/
 function removeDefaultPostType()
 {
 
-    // Remove from Quick Draft
-    add_action('wp_dashboard_setup', 'remove_draft_widget', 999);
+  // Remove from Quick Draft
+  add_action('wp_dashboard_setup', 'remove_draft_widget', 999);
 
-    function remove_draft_widget()
-    {
-        remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
-    }
+  function remove_draft_widget()
+  {
+    remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
+  }
 
-    // Remove from +New Post in Admin Bar
-    add_action('admin_bar_menu', 'remove_default_post_type_menu_bar', 999);
+  // Remove from +New Post in Admin Bar
+  add_action('admin_bar_menu', 'remove_default_post_type_menu_bar', 999);
 
-    function remove_default_post_type_menu_bar($wp_admin_bar)
-    {
-        $wp_admin_bar->remove_node('new-post');
-    }
+  function remove_default_post_type_menu_bar($wp_admin_bar)
+  {
+    $wp_admin_bar->remove_node('new-post');
+  }
 
-    // Remove from the Side Menu
-    add_action('admin_menu', 'remove_default_post_type');
+  // Remove from the Side Menu
+  add_action('admin_menu', 'remove_default_post_type');
 
-    function remove_default_post_type()
-    {
-        remove_menu_page('edit.php');
-    }
-
+  function remove_default_post_type()
+  {
+    remove_menu_page('edit.php');
+  }
 }
 
 // Remove FSE on page type

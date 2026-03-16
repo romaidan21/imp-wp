@@ -6,6 +6,7 @@
             "key": "field_63411aedafd20",
             "label": "Page content",
             "name": "page_content",
+            "aria-label": "",
             "type": "group",
             "instructions": "",
             "required": 0,
@@ -21,6 +22,7 @@
                     "key": "field_63411bb3d4cfa",
                     "label": "Welcome",
                     "name": "",
+                    "aria-label": "",
                     "type": "tab",
                     "instructions": "",
                     "required": 0,
@@ -31,12 +33,14 @@
                         "id": ""
                     },
                     "placement": "top",
-                    "endpoint": 0
+                    "endpoint": 0,
+                    "selected": 0
                 },
                 {
                     "key": "field_63411be2d4cfb",
                     "label": "Screen content",
                     "name": "welcome_screen",
+                    "aria-label": "",
                     "type": "group",
                     "instructions": "",
                     "required": 0,
@@ -57,7 +61,7 @@
             {
                 "param": "page",
                 "operator": "==",
-                "value": "5"
+                "value": "14"
             }
         ]
     ],
@@ -72,5 +76,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1665211451
+    "display_title": "",
+    "modified": 1773688678
 }

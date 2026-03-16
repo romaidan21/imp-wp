@@ -1,0 +1,4 @@
+<?php
+
+renderSection('intro');
+
