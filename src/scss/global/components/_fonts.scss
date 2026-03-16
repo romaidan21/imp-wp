@@ -1,0 +1,19 @@
+@use "utils" as *;
+
+// Font-faces
+@include font-face("NotoSans-Regular", "NotoSans-Regular", 400);
+@include font-face("NotoSans-Medium", "NotoSans-Medium", 500);
+@include font-face("NotoSans-SemiBold", "NotoSans-SemiBold", 600);
+
+body,
+p {
+  // @include extatica-100; // add general font styles
+}
+
+.caps {
+  text-transform: uppercase;
+}
+
+.extatica-100 {
+  // @include extatica-100;
+}

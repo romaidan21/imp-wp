@@ -1,0 +1,19 @@
+{
+  "name": "bamboo-tools",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "gulp watch",
+    "build": "gulp build",
+    "dev": "gulp watch",
+    "archive": "gulp archive"
+  },
+  "devDependencies": {
+    "gulp": "^5.0.0",
+    "gulp-sass": "^5.1.0"
+  },
+  "dependencies": {
+    "gulp-notify": "^4.0.0"
+  }
+}

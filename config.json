@@ -1,0 +1,14 @@
+﻿{
+  "siteName": "imp",
+  "themeName": "bamboo",
+  "url": {
+    "local": "http://imp.loc",
+    "staging": "https://imp.bambus.com.ua",
+    "production": "https://imp.com"
+  },
+  "jsEntries": [
+    "index",
+    "page-home",
+    "page-404"
+  ]
+}

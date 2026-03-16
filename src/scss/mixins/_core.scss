@@ -1,0 +1,196 @@
+@use "sass:string";
+@use "sass:math";
+@use "sass:meta";
+@use "sass:list";
+
+@use "../global/env" as *;
+@use "../utils/functions" as *;
+
+// Flex layout
+@mixin flex($dir: row, $gap: 0) {
+  display: flex;
+  flex-direction: $dir;
+  @if $gap != 0 {
+    gap: $gap;
+  }
+}
+
+// Flex with centered childs
+@mixin flex-c {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Grid layout
+@mixin grid($num: 4, $col-gap: 0, $row-gap: 0) {
+  display: grid;
+  grid-template-columns: repeat($num, 1fr);
+
+  @if $col-gap != 0 {
+    column-gap: $col-gap;
+  }
+  @if $row-gap != 0 {
+    row-gap: $row-gap;
+  }
+}
+
+// Center grid
+@mixin grid-c {
+  display: grid;
+  place-items: center;
+}
+
+// Inset parent container
+@mixin inset($num: 0) {
+  position: absolute;
+  inset: $num;
+}
+
+// Embeded svg
+@mixin svg-icon {
+  @include flex-c;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Object fit
+@mixin fit($fit: cover) {
+  overflow: hidden;
+  & > * {
+    /* img, picture, canvas, video, iframe */
+    width: 100%;
+    height: 100%;
+    object-fit: $fit;
+  }
+}
+
+// Hide scrollbar
+@mixin no-scrollbar {
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+// Check for AMP
+@mixin is-amp {
+  html.i-amphtml-singledoc &,
+  html[amp] & {
+    @content;
+  }
+}
+
+// Limit text block by lines num
+@mixin text-clamp($num: 0) {
+  @if $num == 0 {
+    display: initial;
+    overflow: visible;
+  } @else {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-line-clamp: $num;
+    line-clamp: $num;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// Background image declaration with lazy loading support
+@mixin use-img(
+  $path,
+  $position: center center,
+  $size: contain,
+  $repeat: no-repeat,
+  $pseudo-context: false
+) {
+  $extension: null;
+  $dotIndex: 0;
+  $charIndex: 1;
+  $totalLength: string.length($path);
+
+  // Find the last dot to get extension
+  @while $charIndex <= $totalLength {
+    $char: string.slice($path, $charIndex, $charIndex);
+    @if $char == "." {
+      $dotIndex: $charIndex;
+    }
+    $charIndex: $charIndex + 1;
+  }
+
+  @if $dotIndex > 0 {
+    $extension: string.slice($path, $dotIndex + 1);
+  }
+
+  // Determine if we should convert to webp (not for SVG files or already webp files)
+  $shouldConvertToWebp: $env == "production" and $extension != "svg" and
+    $extension != "webp" and $extension != "avif" and $extension != "gif";
+  $finalPath: if($shouldConvertToWebp, replace-extension($path, "webp"), $path);
+
+  // Auto-detect if we're in a pseudo-element context
+  $is-pseudo-context: $pseudo-context;
+
+  @if not $is-pseudo-context {
+    // Try to detect pseudo-elements by looking at selector context
+    $current-selector: #{&};
+    @if string.index($current-selector, "::before") or
+      string.index($current-selector, "::after")
+    {
+      $is-pseudo-context: true;
+    }
+  }
+
+  // Only generate CSS for cases that actually show the image
+  // Lazy elements without data-lazy attribute get styles
+  @if $is-pseudo-context {
+    // For pseudo-elements
+    @at-root {
+      // Show image for elements without data-lazy attribute
+      #{selector.replace(&, "::before", ":not([data-lazy])::before")},
+      #{selector.replace(&, "::after", ":not([data-lazy])::after")} {
+        background: url($finalPath) $position / $size $repeat;
+      }
+    }
+  } @else {
+    // For regular elements
+    // Show image for elements without data-lazy attribute
+    &:not([data-lazy]) {
+      background: url($finalPath) $position / $size $repeat;
+    }
+  }
+}
+
+// @Fontface generator
+@mixin font-face($name, $file, $weight: 400, $path: "../fonts/") {
+  @font-face {
+    font-family: string.quote($name);
+    src: url(string.quote($path + $file + ".woff2")) format("woff2");
+    font-weight: $weight;
+    font-display: swap;
+  }
+}
+
+// Font declaration
+@mixin use-font($name, $sizes, $weight, $height: 1, $spacing: normal) {
+  // Check if $sizes is a list using meta.type-of
+  $is-list: meta.type-of($sizes) == "list";
+
+  // Initialize size variables
+  $min-size: if($is-list, list.nth($sizes, 1), $sizes);
+  $max-size: if($is-list, list.nth($sizes, 2), $sizes);
+  $letterSpacing: normal;
+
+  @if $spacing != normal {
+    $letterSpacing: get-letter-spacing($spacing, $max-size);
+  }
+
+  font-family: $name;
+  // Use min-max function only if $sizes is a list
+  font-size: if($is-list, min-max($min-size, $max-size), #{$min-size}px);
+  font-weight: $weight;
+  line-height: $height;
+  letter-spacing: $letterSpacing;
+}

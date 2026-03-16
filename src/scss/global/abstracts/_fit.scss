@@ -1,0 +1,11 @@
+@use "utils" as *;
+// Object fit
+.fit-cover {
+  @include fit(cover);
+}
+.fit-contain {
+  @include fit(contain);
+}
+.fit-fill {
+  @include fit(fill);
+}

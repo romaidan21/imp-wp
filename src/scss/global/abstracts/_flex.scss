@@ -1,0 +1,63 @@
+@use "utils" as *;
+// Flexboxes
+$flex-align: (
+  "start": flex-start,
+  "center": center,
+  "end": flex-end,
+);
+
+$flex-distribute: (
+  "between": space-between,
+  "around": space-around,
+  "evenly": space-evenly,
+);
+
+.flex {
+  &-h {
+    @include flex(row);
+  }
+
+  &-v {
+    @include flex(column);
+  }
+
+  &-c {
+    @include flex-c;
+  }
+}
+
+// Generate alignment classes
+@each $name, $value in $flex-align {
+  // Horizontal container alignments
+  .flex-h {
+    &.y-#{$name} {
+      align-items: $value;
+    }
+    &.x-#{$name} {
+      justify-content: $value;
+    }
+  }
+
+  // Vertical container alignments
+  .flex-v {
+    &.x-#{$name} {
+      align-items: $value;
+    }
+    &.y-#{$name} {
+      justify-content: $value;
+    }
+  }
+}
+
+// Generate distribution classes
+@each $name, $value in $flex-distribute {
+  // Horizontal container distributions
+  .flex-h.x-#{$name} {
+    justify-content: $value;
+  }
+
+  // Vertical container distributions
+  .flex-v.y-#{$name} {
+    justify-content: $value;
+  }
+}

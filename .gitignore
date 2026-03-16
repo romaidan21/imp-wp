@@ -1,0 +1,54 @@
+# Editors config
+.idea
+*.sublime*
+.vscode
+
+# Packages
+node_modules/
+
+# Backup
+.backup/
+
+# DB migrations
+.migrations/
+
+# ENV
+.env
+.env.*
+!.env.loc
+!.env.local
+
+# Sass env
+**/_env.scss
+
+# Timestamp
+app/wp-content/themes/*/.timestamp
+
+# Theme assets
+app/wp-content/themes/*/assets/
+app/wp-content/themes/*/templates/
+
+# Wordpress
+app/wp-content/upgrade/
+app/wp-content/cache/
+app/wp-content/wflogs/
+app/wp-content/w3tc-config/
+app/wp-content/webp-express/
+app/wp-content/uploads-webpc/
+app/wp-content/aiowps_backups/
+app/wp-content/advanced-cache.php
+app/.well-known/
+!/app/wp-content/uploads/**/*.svg
+
+wp-admin-pass.txt
+
+
+# Other
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Generated XML files
+app/wp-content/uploads/sitemaps/sitemap.xml

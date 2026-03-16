@@ -1,0 +1,22 @@
+@use "utils" as *;
+
+.wpcf7 {
+  &-response-output,
+  .screen-reader-response {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+// Hide hidden fields in forms
+form {
+  .hidden-fields-container{
+    display: none !important;
+  }
+}

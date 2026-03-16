@@ -1,0 +1,164 @@
+@use "sass:string";
+@use "sass:math";
+@use "sass:meta";
+@use "sass:list";
+
+// Convert px to rem
+@function px2rem($pixel) {
+  @if math.is-unitless($pixel) {
+    @return math.div($pixel, 16) + rem;
+  } @else {
+    @error 'Don\'t use units when using the rem() function; only numbers.';
+  }
+}
+
+// Convert px to %
+@function px2per($parent_size, $child_size) {
+  @return math.percentage(math.div($child_size, $parent_size));
+}
+
+// Convert px to vw
+@function px2vw($px) {
+  // Default viewport width
+  $def_screen: 1920;
+
+  @if math.is-unitless($px) {
+    $vw: $def_screen * 0.01;
+    // Round to 3 decimal places using math.div() and round()
+    @return math.div(round($px * 1000 / $vw), 1000) * 1vw;
+  } @else {
+    @error 'Don\'t use units when using the px2vw() function; only numbers.';
+  }
+}
+
+// Convert % to em
+@function per2em($percentage) {
+  @if math.unit($percentage) == "%" {
+    @return math.div(math.div($percentage, 1%), 100) * 1em;
+  } @else {
+    @error 'The value must be a percentage when using the per2em() function.';
+  }
+}
+
+// Convert px to em
+@function px2em($px, $base-font-size: 16) {
+  $pxValue: get-value($px);
+  $baseSizeValue: get-value($base-font-size);
+  $value: math.div($pxValue, $baseSizeValue);
+  @return $value * 1em;
+}
+
+// Function to extract unit name from a value
+@function get-unit($value) {
+  @return math.unit($value);
+}
+
+// Function to extract value only, stripping unit name if present
+@function get-value($str) {
+  @if meta.type-of($str) == number {
+    @return math.div($str, ($str * 0 + 1));
+  }
+  @return $str;
+}
+
+// Function to check if value has unit
+@function has-unit($value) {
+  @return get-unit($value) != "";
+}
+
+// Define the min-max function
+@function min-max($min, $max: $min) {
+  // Якщо є var(--...) — не обробляємо як число
+  @if string.index(#{$min}, "var(--") {
+    @return clamp(#{$min}, px2vw($max), #{$max * 1px});
+  }
+
+  // Process values and add px to unitless numbers
+  $min-unit: get-unit($min);
+  $max-unit: get-unit($max);
+
+  $min-value: if($min-unit == "", $min * 1px, $min);
+  $max-value: if($max-unit == "", $max * 1px, $max);
+
+  // Validate units
+  @if $min-unit != "" and $min-unit != "rem" and $min-unit != "vw" and $min-unit != "px" {
+    @error 'min-max() only accepts rem, vw, or unitless values (px). Got: #{$min-unit}';
+  }
+
+  @if $max-unit != "" and $max-unit != "rem" and $max-unit != "vw" and $max-unit != "px" {
+    @error 'min-max() only accepts rem, vw, or unitless values (px). Got: #{$max-unit}';
+  }
+
+  // If values are equal, return the max value
+  @if $min == $max {
+    @return $max-value;
+  }
+
+  @return clamp($min-value, px2vw($max), $max-value);
+}
+
+// String replace
+@function str-replace($string, $search, $replace: "") {
+  $index: string.index($string, $search);
+
+  @if $index {
+    @return string.slice($string, 1, $index - 1) + $replace + str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+// Replace the file extension in a path
+@function replace-extension($path, $new-ext) {
+  // Initialize variables
+  $dotIndex: 0;
+  $charIndex: 1;
+  $totalLength: string.length($path);
+
+  // Loop through all characters in $path
+  @while $charIndex <= $totalLength {
+    $char: string.slice($path, $charIndex, $charIndex);
+    @if $char == "." {
+      $dotIndex: $charIndex;
+    }
+    $charIndex: $charIndex + 1;
+  }
+
+  // Extract the part of the path before the last '.'
+  $base: string.slice($path, 1, $dotIndex - 1);
+
+  // Create a new path with the new extension
+  $newPath: $base + "." + $new-ext;
+
+  // Return the new path
+  @return $newPath;
+}
+
+// Get letter spacing
+@function get-letter-spacing($spacing, $font-size) {
+  // Input validation first
+  @if math.is-unitless($spacing) {
+    @error 'Letter spacing must be of type %, px or em';
+  }
+
+  $unit: get-unit($spacing);
+  @if not($unit == "em" or $unit == "%" or $unit == "px") {
+    @error 'Unsupported unit type: #{$unit}';
+  }
+
+  // After validation, proceed with calculations
+  $value: get-value($spacing);
+
+  // If it's already in em, return as is
+  @if $unit == "em" {
+    @return $spacing;
+  }
+
+  // If it's a percentage, convert to em relative to font-size
+  @if $unit == "%" {
+    @return math.div($value * $font-size, 100 * $font-size) * 1em;
+  }
+
+  // If it's px, convert to em
+  @return math.div($value, $font-size) * 1em;
+}

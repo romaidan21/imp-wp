@@ -1,0 +1,108 @@
+{
+    "key": "group_676591c9dfeb1",
+    "title": "-- PATTERNS --",
+    "fields": [
+        {
+            "key": "field_676591ca1a8c5",
+            "label": "",
+            "name": "contacts",
+            "aria-label": "",
+            "type": "flexible_content",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layouts": {
+                "layout_65f36ebe22072": {
+                    "key": "layout_65f36ebe22072",
+                    "name": "email",
+                    "label": "Email",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_676591ca21e05",
+                            "label": "Email",
+                            "name": "url",
+                            "aria-label": "",
+                            "type": "email",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "allow_in_bindings": 1,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_65f36f0222075": {
+                    "key": "layout_65f36f0222075",
+                    "name": "phone",
+                    "label": "Phone",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_676591ca25896",
+                            "label": "Phone",
+                            "name": "url",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 1,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            },
+            "min": "",
+            "max": "",
+            "button_label": "Add Row"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_status",
+                "operator": "==",
+                "value": "trash"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1734709928
+}

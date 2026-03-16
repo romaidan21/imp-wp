@@ -1,0 +1,8 @@
+// css/global/_index.scss
+@forward "variables";
+@forward "normalize";
+
+@forward 'abstracts';
+@forward 'themes';
+@forward 'components';
+@forward 'layout';

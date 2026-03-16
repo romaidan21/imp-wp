@@ -1,0 +1,5 @@
+@use "utils" as *;
+
+.svg-icon {
+  @include svg-icon;
+}

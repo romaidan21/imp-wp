@@ -1,0 +1,120 @@
+section.main .df {
+  display: flex;
+  gap: 8px;
+}
+section.main .fd-c {
+  flex-direction: column;
+}
+section.main .container {
+  width: 99%;
+}
+section.main .grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 20px;
+}
+section.main .section-heading .heading-tabs {
+  display: flex;
+}
+section.main .section-heading .heading-tabs .tabs-item {
+  border: none;
+  background: #e9e9e9;
+  padding-block: 12px;
+  padding-inline: 20px;
+  cursor: pointer;
+}
+section.main .section-heading .heading-tabs .tabs-item.active {
+  background: #fff;
+}
+section.main .section-content {
+  min-height: 400px;
+  background: #fff;
+  padding: 20px;
+}
+section.main .section-content .content-item {
+  display: none;
+}
+section.main .section-content .content-item.active {
+  display: flex;
+}
+section.main .tools-links {
+  display: flex;
+  gap: 6px;
+}
+section.main a, section.main .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: 12px;
+  padding-inline: 20px;
+  border: 1px solid #919191;
+  border-radius: 8px;
+  color: #1d1d1d;
+  text-decoration: none;
+  background: #fff;
+  margin-block: 12px;
+  cursor: pointer;
+}
+section.main a.inverted, section.main .btn.inverted {
+  color: #fff;
+  background: #000536;
+}
+section.main a:hover, section.main .btn:hover {
+  background: #000536;
+  color: #fff;
+  transition: all 0.1s;
+}
+section.main a[download] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: 12px;
+  padding-inline: 20px;
+  border: 1px solid #919191;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  background: #000536;
+  margin-block: 12px;
+}
+section.main a[download]:hover {
+  background: #000000;
+  transition: all 0.1s;
+}
+section.main a[disabled] {
+  pointer-events: none;
+  opacity: 0.7;
+}
+section.main .tab-container.mail form p span {
+  display: inline-block;
+  min-width: 30px;
+}
+section.main p.message {
+  font-size: 18px;
+}
+section.main .tab-container.cpt .section-navihation {
+  grid-area: 1/1/2/3;
+  min-width: 161px;
+}
+section.main .tab-container.cpt select, section.main .tab-container.cpt button, section.main .tab-container.cpt input {
+  width: 100%;
+}
+section.main .tab-container.cpt .section-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+section.main .tab-container.cpt .section-items input {
+  width: 300px;
+}
+section.main .tab-container.cpt .delete-post-item {
+  background: none;
+  width: 50px;
+  border: none;
+  cursor: pointer;
+  color: red;
+}
+section.main .tab-container.cpt .delete-post-item:hover {
+  background: rgba(255, 0, 0, 0.3490196078);
+  border-radius: 4px;
+}
