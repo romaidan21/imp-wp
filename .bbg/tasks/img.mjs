@@ -8,7 +8,7 @@ import fastGlob from 'fast-glob';
 const webpOptions = {
   quality: 75,
   effort: 6,
-  lossless: true
+  lossless: false
 };
 
 const avifOptions = {

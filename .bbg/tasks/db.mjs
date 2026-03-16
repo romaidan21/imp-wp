@@ -28,7 +28,7 @@ import {
   removeRemoteFile,
   streamRemoteToLocal,
 } from "../utils/remote.mjs";
-import { runLocal, createLocalDir } from "../utils/local.mjs";
+import { runLocal, createLocalDir, runLocalSilent } from "../utils/local.mjs";
 import {
   getPooledConnection,
   releaseConnection,
@@ -708,8 +708,39 @@ const createDump = async (
 
     // Detect database version and build appropriate flags
     const dbInfo = await getDbVersion(env, conn);
-    const dumpFlags = buildDumpFlags(dbInfo);
+    let dumpFlags = buildDumpFlags(dbInfo);
     const dumpCommand = getDumpCommand(dbInfo);
+
+    // Probe if dump command supports --skip-column-statistics flag
+    // (MariaDB client tools don't support this flag even though the server is MariaDB)
+    if (dumpFlags.includes("--skip-column-statistics")) {
+      try {
+        let helpOutput;
+        if (env === "local") {
+          // For local, get help output and check if it contains the flag
+          helpOutput = await runLocalSilent(`${sudo}${dumpCommand} --help`, { shell: true });
+        } else {
+          // For remote, use runRemoteSilent
+          helpOutput = await runRemoteSilent(`${sudo}${dumpCommand} --help`, conn);
+        }
+
+        // Check if help output actually contains skip-column-statistics option
+        if (helpOutput.includes("skip-column-statistics")) {
+          debugLog(`${dumpCommand} supports --skip-column-statistics flag`);
+        } else {
+          throw new Error("Flag not found in help output");
+        }
+      } catch (err) {
+        debugLog(
+          `${dumpCommand} does not support --skip-column-statistics, removing flag`,
+          { env, err: err.message }
+        );
+        dumpFlags = dumpFlags
+          .replace("--skip-column-statistics", "")
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+    }
 
     debugLog(`Dump configuration`, {
       command: dumpCommand,
@@ -739,8 +770,17 @@ const createDump = async (
         },
         conn
       );
+
+      // Verify dump file was created and is not empty
+      if (env === "local") {
+        const stats = await fs.stat(targetPath);
+        if (stats.size === 0) {
+          throw new Error(`Dump file is empty (0 bytes). Database "${DB_NAME}" may be empty or dump command failed.`);
+        }
+        debugLog(`Dump file created: ${formatSize(stats.size)}`);
+      }
     } else {
-      const dumpCmd = `${sudo}mysqldump ${dumpFlags} -u${DB_USER}${askPass(
+      const dumpCmd = `${sudo}${dumpCommand} ${dumpFlags} -u${DB_USER}${askPass(
         env,
         DB_PASSWORD
       )} -h${DB_HOST} ${DB_NAME} > "${targetPath}"`;
@@ -751,6 +791,15 @@ const createDump = async (
         },
         conn
       );
+
+      // Verify dump file was created and is not empty
+      if (env === "local") {
+        const stats = await fs.stat(targetPath);
+        if (stats.size === 0) {
+          throw new Error(`Dump file is empty (0 bytes). Database "${DB_NAME}" may be empty or dump command failed.`);
+        }
+        debugLog(`Dump file created: ${formatSize(stats.size)}`);
+      }
     }
   } catch (error) {
     logErrorWithSuggestions(error, "Database dump creation");
@@ -1670,6 +1719,53 @@ const backupDB = async (
         const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, sudo } = getEnv(env);
         const dumpCommand = getDumpCommand(versionInfo);
 
+        // Verify dump command exists on remote server
+        try {
+          await runRemoteSilent(`which ${dumpCommand}`, currentConn);
+          debugLog(`Verified ${dumpCommand} exists on remote server`);
+        } catch (err) {
+          // If mariadb-dump not found but this is MariaDB, try mysqldump as fallback
+          if (versionInfo.isMariaDB && dumpCommand === "mariadb-dump") {
+            log.warn(`⚠️  mariadb-dump not found, trying mysqldump as fallback`);
+            try {
+              await runRemoteSilent(`which mysqldump`, currentConn);
+              const fallbackCommand = "mysqldump";
+              debugLog(`Using fallback: ${fallbackCommand}`);
+
+              // For MariaDB using mysqldump, we need to adjust flags
+              // Remove MariaDB-specific flags that mysqldump might not support
+              dumpFlags = buildDumpFlags({ ...versionInfo, isMariaDB: false });
+
+              const remoteCmd = `${sudo}${fallbackCommand} ${dumpFlags} -u${DB_USER}${askPass(
+                env,
+                DB_PASSWORD
+              )} -h${DB_HOST} ${DB_NAME} | ${compressionInfo.compressCmd}`;
+
+              await streamRemoteToLocal(
+                currentConn,
+                remoteCmd,
+                dumpLocalPath,
+                `Streaming remote DB dump from ${env} (${compressionInfo.name}, using mysqldump fallback)`
+              );
+
+              // Verify dump is not empty
+              const stats = await fs.stat(dumpLocalPath);
+              if (stats.size === 0) {
+                throw new Error(`Dump file is empty (0 bytes). Database may be empty or dump command failed.`);
+              }
+              debugLog(`Dump file size: ${formatSize(stats.size)}`);
+              return; // Exit early, dump completed with fallback
+            } catch (fallbackErr) {
+              throw new Error(
+                `Neither mariadb-dump nor mysqldump found on remote server. Please install MySQL/MariaDB client tools.`
+              );
+            }
+          }
+          throw new Error(
+            `${dumpCommand} not found on remote server. Please install MySQL/MariaDB client tools.`
+          );
+        }
+
         // Probe remote tool support for some flags (some remote mysqldump versions may not support them)
         if (dumpFlags.includes("--skip-column-statistics")) {
           try {
@@ -1700,6 +1796,13 @@ const backupDB = async (
           dumpLocalPath,
           `Streaming remote DB dump from ${env} (${compressionInfo.name})`
         );
+
+        // Verify dump is not empty
+        const stats = await fs.stat(dumpLocalPath);
+        if (stats.size === 0) {
+          throw new Error(`Dump file is empty (0 bytes). Database may be empty or dump command failed.`);
+        }
+        debugLog(`Dump file size: ${formatSize(stats.size)}`);
       } else {
         // Uncompressed: stream raw dump
         const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, sudo } = getEnv(env);
@@ -1734,6 +1837,13 @@ const backupDB = async (
           dumpLocalPath,
           `Streaming remote DB dump from ${env}`
         );
+
+        // Verify dump is not empty
+        const stats = await fs.stat(dumpLocalPath);
+        if (stats.size === 0) {
+          throw new Error(`Dump file is empty (0 bytes). Database may be empty or dump command failed.`);
+        }
+        debugLog(`Dump file size: ${formatSize(stats.size)}`);
       }
     }
   } catch (error) {

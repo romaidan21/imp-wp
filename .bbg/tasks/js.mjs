@@ -44,7 +44,38 @@ const createConfig = (env) => ({
   output: {
     path: path.resolve(cfg.path.build.js),
     filename: '[name].js',
+    chunkFilename: 'chunks/[name].js',
     clean: env === 'production' ? true : false,
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      cacheGroups: {
+        // WebGL modules shared across page-home, page-about, page-solutions, page-careers
+        webglVendor: {
+          test: /webgl-(sequencer|particles)/,
+          name: 'webgl-vendor',
+          chunks: 'async',
+          minChunks: 1,
+          priority: 20,
+          reuseExistingChunk: true,
+        },
+        // Swiper - only used on mobile in page-home
+        swiper: {
+          test: /[\\/]node_modules[\\/]swiper/,
+          name: 'swiper-vendor',
+          chunks: 'async',
+          priority: 10,
+        },
+        // Carousel3D/InfiniteSlider - only used on desktop
+        carousel: {
+          test: /Carousel3D/,
+          name: 'carousel-vendor',
+          chunks: 'async',
+          priority: 10,
+        },
+      },
+    },
   },
   mode: env,
   devtool: env === 'production' ? false : 'inline-source-map',

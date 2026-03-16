@@ -50,5 +50,4 @@ wp-admin-pass.txt
 Thumbs.db
 desktop.ini
 
-# Generated XML files
-app/wp-content/uploads/sitemaps/sitemap.xml
+.reports/

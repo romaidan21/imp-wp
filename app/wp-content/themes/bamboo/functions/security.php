@@ -49,7 +49,6 @@ if (defined('WP_DEBUG') && WP_DEBUG && !function_exists('local_debug')) {
    * @param mixed ...$args
    * @return void
    */
-  echo "11111111111111111111";
   function local_debug(...$args): void
   {
     // intentionally empty; override in local-config.php or a dev plugin if needed
@@ -57,6 +56,5 @@ if (defined('WP_DEBUG') && WP_DEBUG && !function_exists('local_debug')) {
 }
 
 if (function_exists('local_debug')) {
-  echo "Debug mode is ON. Remember to disable it in production environments.";
   local_debug();
 }
