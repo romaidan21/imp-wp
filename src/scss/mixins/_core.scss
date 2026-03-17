@@ -100,13 +100,7 @@
 }
 
 // Background image declaration with lazy loading support
-@mixin use-img(
-  $path,
-  $position: center center,
-  $size: contain,
-  $repeat: no-repeat,
-  $pseudo-context: false
-) {
+@mixin use-img($path, $position: center center, $size: contain, $repeat: no-repeat, $pseudo-context: false) {
   $extension: null;
   $dotIndex: 0;
   $charIndex: 1;
@@ -126,9 +120,11 @@
   }
 
   // Determine if we should convert to webp (not for SVG files or already webp files)
-  $shouldConvertToWebp: $env == "production" and $extension != "svg" and
-    $extension != "webp" and $extension != "avif" and $extension != "gif";
-  $finalPath: if($shouldConvertToWebp, replace-extension($path, "webp"), $path);
+  $shouldConvertToWebp: $env == "production" and $extension != "svg" and $extension != "webp" and $extension != "avif" and $extension != "gif";
+  $finalPath: $path;
+  @if $shouldConvertToWebp {
+    $finalPath: replace-extension($path, "webp");
+  }
 
   // Auto-detect if we're in a pseudo-element context
   $is-pseudo-context: $pseudo-context;
@@ -136,9 +132,7 @@
   @if not $is-pseudo-context {
     // Try to detect pseudo-elements by looking at selector context
     $current-selector: #{&};
-    @if string.index($current-selector, "::before") or
-      string.index($current-selector, "::after")
-    {
+    @if string.index($current-selector, "::before") or string.index($current-selector, "::after") {
       $is-pseudo-context: true;
     }
   }
@@ -179,8 +173,12 @@
   $is-list: meta.type-of($sizes) == "list";
 
   // Initialize size variables
-  $min-size: if($is-list, list.nth($sizes, 1), $sizes);
-  $max-size: if($is-list, list.nth($sizes, 2), $sizes);
+  $min-size: $sizes;
+  $max-size: $sizes;
+  @if $is-list {
+    $min-size: list.nth($sizes, 1);
+    $max-size: list.nth($sizes, 2);
+  }
   $letterSpacing: normal;
 
   @if $spacing != normal {
@@ -189,7 +187,11 @@
 
   font-family: $name;
   // Use min-max function only if $sizes is a list
-  font-size: if($is-list, min-max($min-size, $max-size), #{$min-size}px);
+  @if $is-list {
+    font-size: min-max($min-size, $max-size);
+  } @else {
+    font-size: #{$min-size}px;
+  }
   font-weight: $weight;
   line-height: $height;
   letter-spacing: $letterSpacing;

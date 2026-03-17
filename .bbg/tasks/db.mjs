@@ -104,17 +104,17 @@ const checkDB = async (env, conn, options = {}) => {
     // Combined query: check DB existence AND get version in one go
     query = `${sudo}mysql -u${DB_USER} -h${DB_HOST}${askPass(
       env,
-      DB_PASSWORD
+      DB_PASSWORD,
     )} -e "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '${DB_NAME}' LIMIT 1; SELECT VERSION();" -s -N`;
     spinnerMsg = `Checking database "${DB_NAME}" at "${DB_HOST}"`;
     debugLog(
-      `Checking database existence and detecting version at "${DB_HOST}"`
+      `Checking database existence and detecting version at "${DB_HOST}"`,
     );
   } else {
     // Simple existence check
     query = `${sudo}mysql -u${DB_USER} -h${DB_HOST}${askPass(
       env,
-      DB_PASSWORD
+      DB_PASSWORD,
     )} -e "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '${DB_NAME}' LIMIT 1"`;
     spinnerMsg = `Checking database "${DB_NAME}" at "${DB_HOST}"`;
     debugLog(`Checking if database "${DB_NAME}" exists at "${DB_HOST}"`);
@@ -254,23 +254,23 @@ const verifyImport = async (env, conn, expectedMinTables = 1) => {
     // Check table count
     const tableCountCmd = `${sudo}${mysqlCmd} -u${DB_USER} -h${DB_HOST}${askPass(
       env,
-      DB_PASSWORD
+      DB_PASSWORD,
     )} ${DB_NAME} -e "SELECT COUNT(*) as table_count FROM information_schema.tables WHERE table_schema = '${DB_NAME}'" -s -N`;
 
     const runQuery = env === "local" ? runLocal : runRemote;
     const tableCountResult = await runQuery(
       { cmd: tableCountCmd, spinner: `Verifying import: checking table count` },
-      conn
+      conn,
     );
 
     const tableCount = parseInt(tableCountResult.trim());
     debugLog(
-      `Import verification: ${tableCount} tables found (expected min: ${expectedMinTables})`
+      `Import verification: ${tableCount} tables found (expected min: ${expectedMinTables})`,
     );
 
     if (tableCount < expectedMinTables) {
       log.warn(
-        `⚠️  Import verification: Only ${tableCount} tables found (expected at least ${expectedMinTables})`
+        `⚠️  Import verification: Only ${tableCount} tables found (expected at least ${expectedMinTables})`,
       );
       return { success: false, tableCount, issue: "low_table_count" };
     }
@@ -278,12 +278,12 @@ const verifyImport = async (env, conn, expectedMinTables = 1) => {
     // Check database charset
     const charsetCmd = `${sudo}${mysqlCmd} -u${DB_USER} -h${DB_HOST}${askPass(
       env,
-      DB_PASSWORD
+      DB_PASSWORD,
     )} ${DB_NAME} -e "SELECT DEFAULT_CHARACTER_SET_NAME, DEFAULT_COLLATION_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME = '${DB_NAME}'" -s -N`;
 
     const charsetResult = await runQuery(
       { cmd: charsetCmd, spinner: `Verifying import: checking charset` },
-      conn
+      conn,
     );
 
     const [charset, collation] = charsetResult.trim().split("\t");
@@ -326,7 +326,7 @@ const getRecoverySuggestions = (error, operation = "operation") => {
   // SSH connection errors
   if (errorMsg.includes("SSH") || errorMsg.includes("ENOTFOUND")) {
     suggestions.push(
-      "• Check SSH_HOST, SSH_PORT, and SSH_USERNAME in .env file"
+      "• Check SSH_HOST, SSH_PORT, and SSH_USERNAME in .env file",
     );
     suggestions.push("• Verify SSH key exists and has correct permissions");
     suggestions.push("• Test SSH connection manually: ssh user@host");
@@ -416,7 +416,7 @@ const listBackups = async () => {
             date: stats.mtime,
             compressed,
           };
-        })
+        }),
     );
 
     // Sort by date (newest first)
@@ -478,14 +478,14 @@ const selectBackup = async () => {
         if (isNaN(selection) || selection < 1 || selection > backups.length) {
           reject(
             new Error(
-              `Invalid selection. Please enter a number between 1 and ${backups.length}`
-            )
+              `Invalid selection. Please enter a number between 1 and ${backups.length}`,
+            ),
           );
           return;
         }
 
         resolve(backups[selection - 1]);
-      }
+      },
     );
   });
 };
@@ -494,7 +494,7 @@ const selectBackup = async () => {
 const rollbackDB = async (
   targetEnv,
   selectedBackup = null,
-  taskId = "default"
+  taskId = "default",
 ) => {
   log.info(`====== Rolling back ${targetEnv} database ======`);
 
@@ -510,7 +510,7 @@ const rollbackDB = async (
   if (isDryRun()) {
     if (selectedBackup) {
       log.info(
-        `[DRY RUN] Would rollback ${targetEnv} database from: ${selectedBackup.file}`
+        `[DRY RUN] Would rollback ${targetEnv} database from: ${selectedBackup.file}`,
       );
       log.info(`[DRY RUN] Backup environment: ${selectedBackup.env}`);
       log.info(`[DRY RUN] Backup size: ${selectedBackup.sizeFormatted}`);
@@ -534,7 +534,7 @@ const rollbackDB = async (
     // Confirm rollback
     const confirmed = await promptUser(
       `Are you sure you want to rollback "${DB_NAME}" at "${DB_HOST}" (${targetEnv}) with this backup?\nThis will DELETE all current data!`,
-      taskId
+      taskId,
     );
 
     if (!confirmed) {
@@ -627,7 +627,7 @@ const streamLocalDumpToRemote = async (localDumpPath, env, conn) => {
           const duration = ((Date.now() - startTime) / 1000).toFixed(2);
           const sizeMB = (bytesRead / (1024 * 1024)).toFixed(2);
           const speed = (bytesRead / (1024 * 1024) / (duration || 1)).toFixed(
-            2
+            2,
           );
 
           debugLog(`Stream completed`, {
@@ -640,13 +640,13 @@ const streamLocalDumpToRemote = async (localDumpPath, env, conn) => {
 
           if (exitCode === 0) {
             log.info(
-              `📊 Streamed ${sizeMB} MB in ${duration}s (${speed} MB/s)`
+              `📊 Streamed ${sizeMB} MB in ${duration}s (${speed} MB/s)`,
             );
             resolve();
           } else {
             const errorMsg = stderr || stdout || "Unknown error";
             reject(
-              new Error(`Stream failed with code ${exitCode}: ${errorMsg}`)
+              new Error(`Stream failed with code ${exitCode}: ${errorMsg}`),
             );
           }
         }
@@ -693,7 +693,7 @@ const createDump = async (
   targetPath,
   conn,
   compressed = true,
-  migrate = false
+  migrate = false,
 ) => {
   log.info(`====== Creating dump for ${env} database ======`);
   const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, sudo } = getEnv(env);
@@ -718,10 +718,15 @@ const createDump = async (
         let helpOutput;
         if (env === "local") {
           // For local, get help output and check if it contains the flag
-          helpOutput = await runLocalSilent(`${sudo}${dumpCommand} --help`, { shell: true });
+          helpOutput = await runLocalSilent(`${sudo}${dumpCommand} --help`, {
+            shell: true,
+          });
         } else {
           // For remote, use runRemoteSilent
-          helpOutput = await runRemoteSilent(`${sudo}${dumpCommand} --help`, conn);
+          helpOutput = await runRemoteSilent(
+            `${sudo}${dumpCommand} --help`,
+            conn,
+          );
         }
 
         // Check if help output actually contains skip-column-statistics option
@@ -733,7 +738,7 @@ const createDump = async (
       } catch (err) {
         debugLog(
           `${dumpCommand} does not support --skip-column-statistics, removing flag`,
-          { env, err: err.message }
+          { env, err: err.message },
         );
         dumpFlags = dumpFlags
           .replace("--skip-column-statistics", "")
@@ -758,7 +763,7 @@ const createDump = async (
 
       const dumpCmd = `${sudo}${dumpCommand} ${dumpFlags} -u${DB_USER}${askPass(
         env,
-        DB_PASSWORD
+        DB_PASSWORD,
       )} -h${DB_HOST} ${DB_NAME} | ${
         compressionInfo.compressCmd
       } > "${targetPath}"`;
@@ -768,35 +773,39 @@ const createDump = async (
           cmd: dumpCmd,
           spinner: `Creating compressed dump "${DB_NAME}" using ${compressionInfo.name}`,
         },
-        conn
+        conn,
       );
 
       // Verify dump file was created and is not empty
       if (env === "local") {
         const stats = await fs.stat(targetPath);
         if (stats.size === 0) {
-          throw new Error(`Dump file is empty (0 bytes). Database "${DB_NAME}" may be empty or dump command failed.`);
+          throw new Error(
+            `Dump file is empty (0 bytes). Database "${DB_NAME}" may be empty or dump command failed.`,
+          );
         }
         debugLog(`Dump file created: ${formatSize(stats.size)}`);
       }
     } else {
       const dumpCmd = `${sudo}${dumpCommand} ${dumpFlags} -u${DB_USER}${askPass(
         env,
-        DB_PASSWORD
+        DB_PASSWORD,
       )} -h${DB_HOST} ${DB_NAME} > "${targetPath}"`;
       await runQuery(
         {
           cmd: dumpCmd,
           spinner: `Creating dump "${DB_NAME}" to ${targetPath}`,
         },
-        conn
+        conn,
       );
 
       // Verify dump file was created and is not empty
       if (env === "local") {
         const stats = await fs.stat(targetPath);
         if (stats.size === 0) {
-          throw new Error(`Dump file is empty (0 bytes). Database "${DB_NAME}" may be empty or dump command failed.`);
+          throw new Error(
+            `Dump file is empty (0 bytes). Database "${DB_NAME}" may be empty or dump command failed.`,
+          );
         }
         debugLog(`Dump file created: ${formatSize(stats.size)}`);
       }
@@ -849,13 +858,13 @@ const updateUrls = async (dump, source, target) => {
   // ACF serialized link pattern (expanded to capture full URLs)
   const acfLinkRegex = new RegExp(
     `s:[1-9][0-9]{0,2}:\\\\"${escapeRegex(oldUrl)}[^"\\\\]*`,
-    "g"
+    "g",
   );
 
   // URL replacement pattern that excludes email addresses
   const urlRegex = new RegExp(
     `(?<!@[\\w.-]*?)${escapeRegex(oldUrl)}(?!\\s*@)`,
-    "g"
+    "g",
   );
 
   // Collection arrays for grouped logging (only in debug mode)
@@ -941,7 +950,7 @@ const updateUrls = async (dump, source, target) => {
           // Collect ACF data for grouped logging - only for entries with real field keys
           const dataContext = data.substring(
             Math.max(0, data.indexOf(match) - 2000),
-            data.indexOf(match) + match.length + 1000
+            data.indexOf(match) + match.length + 1000,
           );
 
           // Extract field key with better pattern matching
@@ -980,7 +989,7 @@ const updateUrls = async (dump, source, target) => {
     spinner.start(
       `Changing url's from "${oldUrl}" to "${newUrl}"${
         isCompressed ? " (compressed)" : ""
-      }`
+      }`,
     );
 
     const tempFile = `${dump}.tmp`;
@@ -989,10 +998,10 @@ const updateUrls = async (dump, source, target) => {
     // but with a note that gz tool is used everywhere else
     if (isDebug) {
       log.info(
-        `🔧 Stream processing: Using zlib for reliable stream operations`
+        `🔧 Stream processing: Using zlib for reliable stream operations`,
       );
       log.info(
-        `💡 Note: ${compressionInfo.name} is used for all other compression operations`
+        `💡 Note: ${compressionInfo.name} is used for all other compression operations`,
       );
 
       // OPTIMIZATION IDEAS (current implementation is already optimal):
@@ -1040,15 +1049,15 @@ const updateUrls = async (dump, source, target) => {
             `🔍 Temp file compression check: Size ${
               buffer.length
             } bytes, Magic: ${buffer[0]?.toString(16)} ${buffer[1]?.toString(
-              16
-            )}`
+              16,
+            )}`,
           );
         }
 
         if (!isProperlyCompressed) {
           if (isDebug) {
             log.warn(
-              `⚠️  zlib stream didn't create proper gzip headers, using ${compressionInfo.name} instead`
+              `⚠️  zlib stream didn't create proper gzip headers, using ${compressionInfo.name} instead`,
             );
           }
 
@@ -1077,8 +1086,8 @@ const updateUrls = async (dump, source, target) => {
                 if (code !== 0 && code !== null) {
                   reject(
                     new Error(
-                      `${compressionInfo.name} exited with code ${code}`
-                    )
+                      `${compressionInfo.name} exited with code ${code}`,
+                    ),
                   );
                 }
               });
@@ -1101,7 +1110,7 @@ const updateUrls = async (dump, source, target) => {
         }
       } catch (verifyError) {
         log.warn(
-          `⚠️  Could not verify temp file compression: ${verifyError.message}`
+          `⚠️  Could not verify temp file compression: ${verifyError.message}`,
         );
       }
     } else {
@@ -1120,13 +1129,13 @@ const updateUrls = async (dump, source, target) => {
       if (acfEntries && acfEntries.length > 0) {
         logStream.write(`\n${"=".repeat(80)}\n`);
         logStream.write(
-          `ACF SERIALIZED FIELD REPLACEMENTS (${acfEntries.length} entries)\n`
+          `ACF SERIALIZED FIELD REPLACEMENTS (${acfEntries.length} entries)\n`,
         );
         logStream.write(`${"=".repeat(80)}\n`);
 
         acfEntries.forEach((entry) => {
           logStream.write(
-            `🔄 ACF #${entry.number}: ${entry.fieldKey} | ${entry.oldUrl} → ${entry.newUrl}\n`
+            `🔄 ACF #${entry.number}: ${entry.fieldKey} | ${entry.oldUrl} → ${entry.newUrl}\n`,
           );
         });
       }
@@ -1134,13 +1143,13 @@ const updateUrls = async (dump, source, target) => {
       if (emailEntries && emailEntries.length > 0) {
         logStream.write(`\n${"=".repeat(80)}\n`);
         logStream.write(
-          `EMAIL ADDRESSES DETECTED (${emailEntries.length} entries - NOT REPLACED)\n`
+          `EMAIL ADDRESSES DETECTED (${emailEntries.length} entries - NOT REPLACED)\n`,
         );
         logStream.write(`${"=".repeat(80)}\n`);
 
         emailEntries.forEach((entry) => {
           logStream.write(
-            `📧 EMAIL DETECTED #${entry.number}${entry.context} (NOT REPLACED):\n`
+            `📧 EMAIL DETECTED #${entry.number}${entry.context} (NOT REPLACED):\n`,
           );
           if (entry.purpose) {
             logStream.write(`   📋 Purpose: ${entry.purpose}\n`);
@@ -1154,16 +1163,16 @@ const updateUrls = async (dump, source, target) => {
       logStream.write(`\n${"=".repeat(80)}\n`);
       logStream.write(`FINAL SUMMARY:\n`);
       logStream.write(
-        `Email Addresses: ${emailReplacements} detected (NOT REPLACED)\n`
+        `Email Addresses: ${emailReplacements} detected (NOT REPLACED)\n`,
       );
       logStream.write(
         `ACF Serialized Links: ${acfReplacements} replacements (${
           acfEntries ? acfEntries.length : 0
-        } with field keys logged)\n`
+        } with field keys logged)\n`,
       );
       logStream.write(`Regular URLs: ${urlReplacements} replacements\n`);
       logStream.write(
-        `Total Replacements: ${acfReplacements + urlReplacements}\n`
+        `Total Replacements: ${acfReplacements + urlReplacements}\n`,
       );
       logStream.write(`${"=".repeat(80)}\n`);
       logStream.end();
@@ -1176,7 +1185,7 @@ const updateUrls = async (dump, source, target) => {
 
     if (emailReplacements > 0) {
       log.info(
-        `📧 Email Addresses: ${emailReplacements} detected (NOT REPLACED)`
+        `📧 Email Addresses: ${emailReplacements} detected (NOT REPLACED)`,
       );
     }
     if (acfReplacements > 0) {
@@ -1222,7 +1231,7 @@ const createDB = async (
   conn,
   noBackup = false,
   compressed = true,
-  taskId = "default"
+  taskId = "default",
 ) => {
   log.info(`====== Creating ${env} database ======`);
   const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, sudo } = getEnv(env);
@@ -1239,11 +1248,11 @@ const createDB = async (
   // Split commands to handle errors better
   const dropCmd = `${sudo}mysql -u${DB_USER} -h${DB_HOST}${askPass(
     env,
-    DB_PASSWORD
+    DB_PASSWORD,
   )} -e "DROP DATABASE IF EXISTS ${DB_NAME}"`;
   const createCmd = `${sudo}mysql -u${DB_USER} -h${DB_HOST}${askPass(
     env,
-    DB_PASSWORD
+    DB_PASSWORD,
   )} -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME} CHARACTER SET ${
     cfg.db.charset
   } COLLATE ${cfg.db.collate}"`;
@@ -1256,7 +1265,7 @@ const createDB = async (
     if (!isPrompted && exists) {
       const shouldProceed = await promptUser(
         `Database "${DB_NAME}" already exists at "${DB_HOST}" (${env}). Do you want to rewrite it?`,
-        taskId
+        taskId,
       );
       if (!shouldProceed) {
         log.warn("DB creation cancelled by user");
@@ -1274,7 +1283,7 @@ const createDB = async (
     if (isDryRun()) {
       log.info(`[DRY RUN] Would drop database "${DB_NAME}" if exists`);
       log.info(
-        `[DRY RUN] Would create database "${DB_NAME}" with charset ${cfg.db.charset} collate ${cfg.db.collate}`
+        `[DRY RUN] Would create database "${DB_NAME}" with charset ${cfg.db.charset} collate ${cfg.db.collate}`,
       );
       if (dump) {
         log.info(`[DRY RUN] Would import dump: ${dump}`);
@@ -1289,7 +1298,7 @@ const createDB = async (
         spinner: `Dropping existing database "${DB_NAME}" if exists`,
         fallback: (err) => log.error(`Failed to drop database: ${err}`),
       },
-      conn
+      conn,
     );
 
     await runQuery(
@@ -1298,14 +1307,14 @@ const createDB = async (
         spinner: `Creating database "${DB_NAME}"`,
         fallback: (err) => log.error(`Failed to create database: ${err}`),
       },
-      conn
+      conn,
     );
 
     if (env === "local" && dump) {
       // Check if dump file exists before proceeding
       if (!fs.existsSync(dump)) {
         throw new Error(
-          `Dump file "${dump}" does not exist. Cannot proceed with database import.`
+          `Dump file "${dump}" does not exist. Cannot proceed with database import.`,
         );
       }
 
@@ -1328,7 +1337,7 @@ const createDB = async (
 
       if (getArgs().debug) {
         log.info(
-          `🗜️  File extension suggests compressed: ${dump.endsWith(".gz")}`
+          `🗜️  File extension suggests compressed: ${dump.endsWith(".gz")}`,
         );
         log.info(`🔍 File is actually compressed: ${isActuallyCompressed}`);
       }
@@ -1399,7 +1408,7 @@ const createDB = async (
             log.success(`✅ Fallback import succeeded!`);
           } catch (fallbackError) {
             throw new Error(
-              `Both PowerShell and CMD import methods failed: ${error.message}, ${fallbackError.message}`
+              `Both PowerShell and CMD import methods failed: ${error.message}, ${fallbackError.message}`,
             );
           }
         }
@@ -1496,7 +1505,7 @@ const updateDB = async (env, dump, conn, taskId = "default") => {
 
   if (isDryRun()) {
     log.info(
-      `[DRY RUN] Would update database "${DB_NAME}" at "${DB_HOST}" (${env})`
+      `[DRY RUN] Would update database "${DB_NAME}" at "${DB_HOST}" (${env})`,
     );
     log.info(`[DRY RUN] Dump file: ${dump}`);
     log.info(`[DRY RUN] Compressed: ${isCompressed}`);
@@ -1557,21 +1566,21 @@ const updateDB = async (env, dump, conn, taskId = "default") => {
               compressionInfo.decompressCmd
             } ${SSH_PATH}/${dump} | ${sudo}mysql -u${DB_USER} -h${DB_HOST}${askPass(
               env,
-              DB_PASSWORD
+              DB_PASSWORD,
             )} --default-character-set=utf8mb4 ${DB_NAME} --force`,
           },
           {
             name: "gunzip pipe",
             cmd: `gunzip -c ${SSH_PATH}/${dump} | ${sudo}mysql -u${DB_USER} -h${DB_HOST}${askPass(
               env,
-              DB_PASSWORD
+              DB_PASSWORD,
             )} --default-character-set=utf8mb4 ${DB_NAME} --force`,
           },
           {
             name: "zcat pipe",
             cmd: `zcat ${SSH_PATH}/${dump} | ${sudo}mysql -u${DB_USER} -h${DB_HOST}${askPass(
               env,
-              DB_PASSWORD
+              DB_PASSWORD,
             )} --default-character-set=utf8mb4 ${DB_NAME} --force`,
           },
         ];
@@ -1584,7 +1593,7 @@ const updateDB = async (env, dump, conn, taskId = "default") => {
                 cmd: method.cmd,
                 spinner: `Importing via ${method.name}`,
               },
-              conn
+              conn,
             );
             importSuccess = true;
             break;
@@ -1602,11 +1611,11 @@ const updateDB = async (env, dump, conn, taskId = "default") => {
           {
             cmd: `${sudo}mysql -u${DB_USER} -h${DB_HOST}${askPass(
               env,
-              DB_PASSWORD
+              DB_PASSWORD,
             )} --default-character-set=utf8mb4 ${DB_NAME} --force < ${SSH_PATH}/${dump}`,
             spinner: baseSpinner,
           },
-          conn
+          conn,
         );
       }
 
@@ -1619,7 +1628,7 @@ const updateDB = async (env, dump, conn, taskId = "default") => {
       if (await checkDB(env, conn)) {
         const shouldProceed = await promptUser(
           `Database "${DB_NAME}" already exists at "${DB_HOST}" (${env}). Do you want to rewrite it?`,
-          taskId
+          taskId,
         );
         if (!shouldProceed) {
           log.warn("DB update cancelled by user");
@@ -1663,7 +1672,7 @@ const backupDB = async (
   dump,
   conn = null,
   compressed = true,
-  taskId = "default"
+  taskId = "default",
 ) => {
   const { SSH_PATH } = getEnv(env);
 
@@ -1726,7 +1735,9 @@ const backupDB = async (
         } catch (err) {
           // If mariadb-dump not found but this is MariaDB, try mysqldump as fallback
           if (versionInfo.isMariaDB && dumpCommand === "mariadb-dump") {
-            log.warn(`⚠️  mariadb-dump not found, trying mysqldump as fallback`);
+            log.warn(
+              `⚠️  mariadb-dump not found, trying mysqldump as fallback`,
+            );
             try {
               await runRemoteSilent(`which mysqldump`, currentConn);
               const fallbackCommand = "mysqldump";
@@ -1738,31 +1749,33 @@ const backupDB = async (
 
               const remoteCmd = `${sudo}${fallbackCommand} ${dumpFlags} -u${DB_USER}${askPass(
                 env,
-                DB_PASSWORD
+                DB_PASSWORD,
               )} -h${DB_HOST} ${DB_NAME} | ${compressionInfo.compressCmd}`;
 
               await streamRemoteToLocal(
                 currentConn,
                 remoteCmd,
                 dumpLocalPath,
-                `Streaming remote DB dump from ${env} (${compressionInfo.name}, using mysqldump fallback)`
+                `Streaming remote DB dump from ${env} (${compressionInfo.name}, using mysqldump fallback)`,
               );
 
               // Verify dump is not empty
               const stats = await fs.stat(dumpLocalPath);
               if (stats.size === 0) {
-                throw new Error(`Dump file is empty (0 bytes). Database may be empty or dump command failed.`);
+                throw new Error(
+                  `Dump file is empty (0 bytes). Database may be empty or dump command failed.`,
+                );
               }
               debugLog(`Dump file size: ${formatSize(stats.size)}`);
               return; // Exit early, dump completed with fallback
             } catch (fallbackErr) {
               throw new Error(
-                `Neither mariadb-dump nor mysqldump found on remote server. Please install MySQL/MariaDB client tools.`
+                `Neither mariadb-dump nor mysqldump found on remote server. Please install MySQL/MariaDB client tools.`,
               );
             }
           }
           throw new Error(
-            `${dumpCommand} not found on remote server. Please install MySQL/MariaDB client tools.`
+            `${dumpCommand} not found on remote server. Please install MySQL/MariaDB client tools.`,
           );
         }
 
@@ -1771,12 +1784,12 @@ const backupDB = async (
           try {
             await runRemoteSilent(
               `${dumpCommand} --skip-column-statistics --help`,
-              currentConn
+              currentConn,
             );
           } catch (err) {
             debugLog(
               `Remote does not support --skip-column-statistics, removing flag`,
-              { env, err: err.message }
+              { env, err: err.message },
             );
             dumpFlags = dumpFlags
               .replace("--skip-column-statistics", "")
@@ -1787,20 +1800,22 @@ const backupDB = async (
 
         const remoteCmd = `${sudo}${dumpCommand} ${dumpFlags} -u${DB_USER}${askPass(
           env,
-          DB_PASSWORD
+          DB_PASSWORD,
         )} -h${DB_HOST} ${DB_NAME} | ${compressionInfo.compressCmd}`;
 
         await streamRemoteToLocal(
           currentConn,
           remoteCmd,
           dumpLocalPath,
-          `Streaming remote DB dump from ${env} (${compressionInfo.name})`
+          `Streaming remote DB dump from ${env} (${compressionInfo.name})`,
         );
 
         // Verify dump is not empty
         const stats = await fs.stat(dumpLocalPath);
         if (stats.size === 0) {
-          throw new Error(`Dump file is empty (0 bytes). Database may be empty or dump command failed.`);
+          throw new Error(
+            `Dump file is empty (0 bytes). Database may be empty or dump command failed.`,
+          );
         }
         debugLog(`Dump file size: ${formatSize(stats.size)}`);
       } else {
@@ -1813,12 +1828,12 @@ const backupDB = async (
           try {
             await runRemoteSilent(
               `${dumpCommand} --skip-column-statistics --help`,
-              currentConn
+              currentConn,
             );
           } catch (err) {
             debugLog(
               `Remote does not support --skip-column-statistics, removing flag`,
-              { env, err: err.message }
+              { env, err: err.message },
             );
             dumpFlags = dumpFlags
               .replace("--skip-column-statistics", "")
@@ -1829,19 +1844,21 @@ const backupDB = async (
 
         const remoteCmd = `${sudo}${dumpCommand} ${dumpFlags} -u${DB_USER}${askPass(
           env,
-          DB_PASSWORD
+          DB_PASSWORD,
         )} -h${DB_HOST} ${DB_NAME}`;
         await streamRemoteToLocal(
           currentConn,
           remoteCmd,
           dumpLocalPath,
-          `Streaming remote DB dump from ${env}`
+          `Streaming remote DB dump from ${env}`,
         );
 
         // Verify dump is not empty
         const stats = await fs.stat(dumpLocalPath);
         if (stats.size === 0) {
-          throw new Error(`Dump file is empty (0 bytes). Database may be empty or dump command failed.`);
+          throw new Error(
+            `Dump file is empty (0 bytes). Database may be empty or dump command failed.`,
+          );
         }
         debugLog(`Dump file size: ${formatSize(stats.size)}`);
       }
@@ -1859,10 +1876,10 @@ const exportDB = async (
   srcEnv,
   targetEnv,
   compressed = true,
-  taskId = "default"
+  taskId = "default",
 ) => {
   log.info(
-    `====== Generating export DB dump from "${srcEnv}" to "${targetEnv}" ======`
+    `====== Generating export DB dump from "${srcEnv}" to "${targetEnv}" ======`,
   );
 
   debugLog(`Export started`, { srcEnv, targetEnv, compressed });
@@ -1906,21 +1923,21 @@ const exportDB = async (
             compressProcess.on("exit", (code) => {
               if (code !== 0 && code !== null) {
                 reject(
-                  new Error(`${compressionInfo.name} exited with code ${code}`)
+                  new Error(`${compressionInfo.name} exited with code ${code}`),
                 );
               }
             });
           });
         } catch (gzError) {
           log.warn(
-            `⚠️  ${compressionInfo.name} compression failed, using zlib: ${gzError.message}`
+            `⚠️  ${compressionInfo.name} compression failed, using zlib: ${gzError.message}`,
           );
           // Fallback to zlib compression
           try {
             await pipeline(
               fs.createReadStream(uncompressedDump),
               zlib.createGzip(ZLIB_OPTIONS),
-              fs.createWriteStream(compressedDump)
+              fs.createWriteStream(compressedDump),
             );
           } catch (compressErr) {
             log.error(`Compression failed: ${compressErr.message}`);
@@ -1940,12 +1957,12 @@ const exportDB = async (
         `${dumpName}${extension}`,
         conn,
         compressed,
-        taskId
+        taskId,
       );
       await updateUrls(
         `${cfg.path.migrations}/${dumpName}${extension}`,
         srcEnv,
-        targetEnv
+        targetEnv,
       );
     }
   } catch (error) {
@@ -1962,7 +1979,7 @@ const migrateDB = async (
   targetEnv,
   noBackup = false,
   compressed = true,
-  taskId = "default"
+  taskId = "default",
 ) => {
   log.info(`====== Migrating "${srcEnv}" to "${targetEnv}" ======`);
 
@@ -1970,15 +1987,15 @@ const migrateDB = async (
 
   if (isDryRun()) {
     log.info(
-      `[DRY RUN] Would migrate database from "${srcEnv}" to "${targetEnv}"`
+      `[DRY RUN] Would migrate database from "${srcEnv}" to "${targetEnv}"`,
     );
     log.info(
-      `[DRY RUN] Source: ${getEnv(srcEnv).DB_NAME} @ ${getEnv(srcEnv).DB_HOST}`
+      `[DRY RUN] Source: ${getEnv(srcEnv).DB_NAME} @ ${getEnv(srcEnv).DB_HOST}`,
     );
     log.info(
       `[DRY RUN] Target: ${getEnv(targetEnv).DB_NAME} @ ${
         getEnv(targetEnv).DB_HOST
-      }`
+      }`,
     );
     log.info(`[DRY RUN] Backup before migration: ${!noBackup}`);
     log.info(`[DRY RUN] Compression: ${compressed}`);
@@ -2040,21 +2057,21 @@ const migrateDB = async (
             compressProcess.on("exit", (code) => {
               if (code !== 0 && code !== null) {
                 reject(
-                  new Error(`${compressionInfo.name} exited with code ${code}`)
+                  new Error(`${compressionInfo.name} exited with code ${code}`),
                 );
               }
             });
           });
         } catch (gzError) {
           log.warn(
-            `⚠️  ${compressionInfo.name} compression failed, using zlib: ${gzError.message}`
+            `⚠️  ${compressionInfo.name} compression failed, using zlib: ${gzError.message}`,
           );
           // Fallback to zlib compression
           try {
             await pipeline(
               fs.createReadStream(uncompressedDump),
               zlib.createGzip(ZLIB_OPTIONS),
-              fs.createWriteStream(compressedDump)
+              fs.createWriteStream(compressedDump),
             );
           } catch (compressErr) {
             log.error(`Compression failed: ${compressErr.message}`);
@@ -2075,13 +2092,13 @@ const migrateDB = async (
         await uploadFile(
           targetConn,
           dumpToUse,
-          `${targetPath}/${dumpName}${compressed ? ".sql.gz" : ".sql"}`
+          `${targetPath}/${dumpName}${compressed ? ".sql.gz" : ".sql"}`,
         );
         await updateDB(
           targetEnv,
           `${dumpName}${compressed ? ".sql.gz" : ".sql"}`,
           targetConn,
-          taskId
+          taskId,
         );
       }
     } else {
@@ -2091,12 +2108,12 @@ const migrateDB = async (
         `${dumpName}${extension}`,
         srcConn,
         compressed,
-        taskId
+        taskId,
       );
       await updateUrls(
         `${cfg.path.migrations}/${dumpName}${extension}`,
         srcEnv,
-        targetEnv
+        targetEnv,
       );
       if (targetEnv === "local") {
         await createDB(
@@ -2105,19 +2122,19 @@ const migrateDB = async (
           null,
           true,
           compressed,
-          taskId
+          taskId,
         );
       } else {
         await uploadFile(
           targetConn,
           `${cfg.path.migrations}/${dumpName}${extension}`,
-          `${targetPath}/${dumpName}${extension}`
+          `${targetPath}/${dumpName}${extension}`,
         );
         await updateDB(
           targetEnv,
           `${dumpName}${extension}`,
           targetConn,
-          taskId
+          taskId,
         );
       }
     }
@@ -2141,14 +2158,14 @@ const migrateDB = async (
 
     if (!targetExists) {
       log.info(
-        `Target DB "${targetName}" does not exist at "${targetHost}". Creating it...`
+        `Target DB "${targetName}" does not exist at "${targetHost}". Creating it...`,
       );
       // Create the target database structure (without data)
       const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, sudo } =
         getEnv(targetEnv);
       const createCmd = `${sudo}mysql -u${DB_USER} -h${DB_HOST}${askPass(
         targetEnv,
-        DB_PASSWORD
+        DB_PASSWORD,
       )} -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME} CHARACTER SET ${
         cfg.db.charset
       } COLLATE ${cfg.db.collate}"`;
@@ -2159,12 +2176,12 @@ const migrateDB = async (
           cmd: createCmd,
           spinner: `Creating target database "${DB_NAME}"`,
         },
-        targetConn
+        targetConn,
       );
     } else {
       const shouldProceed = await promptUser(
         `Target DB "${targetName}" already exists at "${targetHost}". Do you want to rewrite it?`,
-        taskId
+        taskId,
       );
       if (!shouldProceed) {
         log.warn("DB migration cancelled by user");
@@ -2188,7 +2205,7 @@ const deleteDB = async (
   env,
   noBackup = false,
   compressed = true,
-  taskId = "default"
+  taskId = "default",
 ) => {
   const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, sudo } = getEnv(env);
 
@@ -2205,7 +2222,7 @@ const deleteDB = async (
 
   const cmd = `${sudo}${mysqlCmd} -u${DB_USER} -h${DB_HOST}${askPass(
     env,
-    DB_PASSWORD
+    DB_PASSWORD,
   )} -e"DROP DATABASE IF EXISTS ${DB_NAME};"`;
   const spinnerMsg = `Deleting database "${DB_NAME}" at "${DB_HOST}" (${env})`;
   const promptMsg = `Database "${DB_NAME}" at "${DB_HOST}" (${env}) will be deleted. \n  Are you sure?`;
@@ -2219,7 +2236,7 @@ const deleteDB = async (
   const proceed = async () => {
     if (isDryRun()) {
       log.info(
-        `[DRY RUN] Would delete database "${DB_NAME}" at "${DB_HOST}" (${env})`
+        `[DRY RUN] Would delete database "${DB_NAME}" at "${DB_HOST}" (${env})`,
       );
       log.info(`[DRY RUN] Command: ${cmd}`);
       return;
@@ -2302,7 +2319,7 @@ export const createDbTask = async () => {
     log.error(
       `Database create task failed after ${formatTime(duration)}: ${
         error.message
-      }`
+      }`,
     );
     throw error;
   } finally {
@@ -2330,7 +2347,7 @@ export const updateDbTask = async () => {
     log.error(
       `Database update task failed after ${formatTime(duration)}: ${
         error.message
-      }`
+      }`,
     );
     throw error;
   } finally {
@@ -2363,7 +2380,7 @@ export const backupDbTask = async () => {
     log.error(
       `Database backup task failed after ${formatTime(duration)}: ${
         error.message
-      }`
+      }`,
     );
     throw error;
   } finally {
@@ -2393,7 +2410,7 @@ export const migrateDbTask = async () => {
     log.error(
       `Database migrate task failed after ${formatTime(duration)}: ${
         error.message
-      }`
+      }`,
     );
     throw error;
   } finally {
@@ -2422,7 +2439,7 @@ export const exportDbTask = async () => {
     log.error(
       `Database export task failed after ${formatTime(duration)}: ${
         error.message
-      }`
+      }`,
     );
     throw error;
   } finally {
@@ -2451,7 +2468,7 @@ export const deleteDbTask = async () => {
     log.error(
       `Database delete task failed after ${formatTime(duration)}: ${
         error.message
-      }`
+      }`,
     );
     throw error;
   } finally {
@@ -2478,7 +2495,7 @@ export const rollbackDbTask = async () => {
     log.error(
       `Database rollback task failed after ${formatTime(duration)}: ${
         error.message
-      }`
+      }`,
     );
     throw error;
   } finally {

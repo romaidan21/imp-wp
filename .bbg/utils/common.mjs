@@ -99,7 +99,7 @@ export const args = new Proxy(
       const currentArgs = getArgs();
       return Object.keys(currentArgs);
     },
-  }
+  },
 );
 
 // Get env params
@@ -130,10 +130,10 @@ export async function checkEnv(envs) {
       const filePath = path.resolve(process.cwd(), `.env.${env}`);
       if (!(await fs.pathExists(filePath))) {
         throw new Error(
-          `Environment file "${env}" does not exist or is not accessible`
+          `Environment file "${env}" does not exist or is not accessible`,
         );
       }
-    })
+    }),
   );
 }
 
@@ -153,7 +153,7 @@ export function validateDbName(name) {
 
   if (!validPattern.test(name)) {
     throw new Error(
-      "Database name can only contain letters, numbers, and underscores"
+      "Database name can only contain letters, numbers, and underscores",
     );
   }
 
@@ -530,7 +530,7 @@ export async function validateArgs(args = null, required = []) {
     // Additional validation for specific argument combinations
     if (currentArgs.nocompress && currentArgs.compress) {
       log.warn(
-        "Both --compress and --nocompress specified. Using --nocompress."
+        "Both --compress and --nocompress specified. Using --nocompress.",
       );
     }
   } catch (error) {
@@ -560,7 +560,7 @@ export async function validateArgsWithSchema(args = null, schema = {}) {
           const actualType = typeof currentArgs[key];
           if (actualType !== expectedType) {
             throw new Error(
-              `Argument "--${key}" must be of type ${expectedType}, got ${actualType}`
+              `Argument "--${key}" must be of type ${expectedType}, got ${actualType}`,
             );
           }
         }
@@ -574,7 +574,7 @@ export async function validateArgsWithSchema(args = null, schema = {}) {
           const isValid = validator(currentArgs[key]);
           if (!isValid) {
             throw new Error(
-              `Argument "--${key}" has invalid value: ${currentArgs[key]}`
+              `Argument "--${key}" has invalid value: ${currentArgs[key]}`,
             );
           }
         }
@@ -589,7 +589,7 @@ export async function validateArgsWithSchema(args = null, schema = {}) {
           throw new Error(
             `Arguments ${presentArgs
               .map((arg) => `--${arg}`)
-              .join(", ")} are mutually exclusive`
+              .join(", ")} are mutually exclusive`,
           );
         }
       });
@@ -813,7 +813,7 @@ export function validateRemotePath(envPath, config = null) {
     if (!hasProjectId && !_pathWarningsShown.has(normalizedPath)) {
       console.warn(
         `⚠️  Warning: Staging path "${envPath}" doesn't contain project name "${config.siteName}" or theme "${config.themeName}". ` +
-          `Please verify this is the correct staging directory.`
+          `Please verify this is the correct staging directory.`,
       );
       _pathWarningsShown.add(normalizedPath);
     }
@@ -859,7 +859,7 @@ export function handleTaskResult(
   taskName,
   result,
   env = "development",
-  isWatching = false
+  isWatching = false,
 ) {
   const isDevelopment = env === "development";
   const isProduction = env === "production";
@@ -940,7 +940,7 @@ export function handleTaskResult(
       } else if (isDevelopment) {
         if (isWatching) {
           log.error(
-            `${taskName} failed in development mode. Continuing with watch mode...`
+            `${taskName} failed in development mode. Continuing with watch mode...`,
           );
         } else {
           log.error(`${taskName} failed in development mode.`);
@@ -961,7 +961,7 @@ export function handleTaskError(
   taskName,
   error,
   showDetails = false,
-  skipNotification = false
+  skipNotification = false,
 ) {
   const errorMsg = error.message || error.toString();
 
@@ -1083,7 +1083,7 @@ export async function batchProcessFiles({
     if (isDebug) {
       writeDebugLog(
         taskName,
-        `Reduced concurrency to ${actualConcurrency} for ${operationType} operations`
+        `Reduced concurrency to ${actualConcurrency} for ${operationType} operations`,
       );
     }
   } else if (operationType === "image") {
@@ -1093,7 +1093,7 @@ export async function batchProcessFiles({
   if (isDebug) {
     writeDebugLog(
       taskName,
-      `Batch processing started - ${files.length} files, concurrency: ${actualConcurrency}`
+      `Batch processing started - ${files.length} files, concurrency: ${actualConcurrency}`,
     );
   }
 
@@ -1140,7 +1140,7 @@ export async function batchProcessFiles({
           if (isDebug) {
             writeDebugLog(
               taskName,
-              `Failed to check file ${file}: ${errorMessage}`
+              `Failed to check file ${file}: ${errorMessage}`,
             );
           }
 
@@ -1151,7 +1151,7 @@ export async function batchProcessFiles({
             filesToProcess.push({ file, destPath, relativePath });
           }
         }
-      })
+      }),
     );
 
     await Promise.all(checkTasks);
@@ -1181,8 +1181,8 @@ export async function batchProcessFiles({
                   new Promise((_, reject) =>
                     setTimeout(
                       () => reject(new Error("Operation timeout")),
-                      getOperationTimeout(operationType)
-                    )
+                      getOperationTimeout(operationType),
+                    ),
                   ),
                 ]);
               } else {
@@ -1199,7 +1199,7 @@ export async function batchProcessFiles({
                 if (completedProcessing % 25 === 0) {
                   writeDebugLog(
                     taskName,
-                    `Processing progress: ${completedProcessing}/${filesToProcess.length} files`
+                    `Processing progress: ${completedProcessing}/${filesToProcess.length} files`,
                   );
                 }
                 if (processingTime > 5000) {
@@ -1207,8 +1207,8 @@ export async function batchProcessFiles({
                   writeDebugLog(
                     taskName,
                     `Slow operation: ${path.basename(
-                      file
-                    )} took ${processingTime}ms`
+                      file,
+                    )} took ${processingTime}ms`,
                   );
                 }
               }
@@ -1220,7 +1220,7 @@ export async function batchProcessFiles({
 
               const errorMessage = isTimeout
                 ? `Processing timeout after ${processingTime}ms (limit: ${getOperationTimeout(
-                    operationType
+                    operationType,
                   )}ms)`
                 : error.message;
 
@@ -1234,13 +1234,13 @@ export async function batchProcessFiles({
               if (isDebug) {
                 writeDebugLog(
                   taskName,
-                  `Failed to process ${fileInfo.file}: ${errorMessage}`
+                  `Failed to process ${fileInfo.file}: ${errorMessage}`,
                 );
               }
             }
           },
-          { priority: filesToProcess.length - index }
-        ) // Higher priority for later files
+          { priority: filesToProcess.length - index },
+        ), // Higher priority for later files
     );
 
     processQueue.on("error", (error) => {
@@ -1277,8 +1277,8 @@ export async function batchProcessFiles({
                   new Promise((_, reject) =>
                     setTimeout(
                       () => reject(new Error("Operation timeout")),
-                      getOperationTimeout(operationType)
-                    )
+                      getOperationTimeout(operationType),
+                    ),
                   ),
                 ]);
               } else {
@@ -1295,7 +1295,7 @@ export async function batchProcessFiles({
                 if (completedProcessing % 50 === 0) {
                   writeDebugLog(
                     taskName,
-                    `Processing progress: ${completedProcessing}/${files.length} files`
+                    `Processing progress: ${completedProcessing}/${files.length} files`,
                   );
                 }
                 if (processingTime > 10000) {
@@ -1303,8 +1303,8 @@ export async function batchProcessFiles({
                   writeDebugLog(
                     taskName,
                     `Very slow operation: ${path.basename(
-                      file
-                    )} took ${processingTime}ms`
+                      file,
+                    )} took ${processingTime}ms`,
                   );
                 }
               }
@@ -1316,7 +1316,7 @@ export async function batchProcessFiles({
 
               const errorMessage = isTimeout
                 ? `Processing timeout after ${processingTime}ms (limit: ${getOperationTimeout(
-                    operationType
+                    operationType,
                   )}ms)`
                 : error.message;
 
@@ -1330,13 +1330,13 @@ export async function batchProcessFiles({
               if (isDebug) {
                 writeDebugLog(
                   taskName,
-                  `Failed to process ${file}: ${errorMessage}`
+                  `Failed to process ${file}: ${errorMessage}`,
                 );
               }
             }
           },
-          { priority: files.length - index }
-        ) // Higher priority for later files
+          { priority: files.length - index },
+        ), // Higher priority for later files
     );
 
     processQueue.on("error", (error) => {
@@ -1351,7 +1351,7 @@ export async function batchProcessFiles({
   if (isDebug) {
     writeDebugLog(
       taskName,
-      `Batch processing completed - Processed: ${processedCount}, Skipped: ${skippedCount}, Errors: ${errors.length}`
+      `Batch processing completed - Processed: ${processedCount}, Skipped: ${skippedCount}, Errors: ${errors.length}`,
     );
   }
 

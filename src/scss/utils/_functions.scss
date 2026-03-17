@@ -77,8 +77,15 @@
   $min-unit: get-unit($min);
   $max-unit: get-unit($max);
 
-  $min-value: if($min-unit == "", $min * 1px, $min);
-  $max-value: if($max-unit == "", $max * 1px, $max);
+  $min-value: $min;
+  @if $min-unit == "" {
+    $min-value: $min * 1px;
+  }
+
+  $max-value: $max;
+  @if $max-unit == "" {
+    $max-value: $max * 1px;
+  }
 
   // Validate units
   @if $min-unit != "" and $min-unit != "rem" and $min-unit != "vw" and $min-unit != "px" {
