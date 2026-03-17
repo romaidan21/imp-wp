@@ -1384,31 +1384,34 @@ const createDB = async (
           throw new Error("All compressed import methods failed");
         }
       } else {
-        // File is uncompressed, use direct import with PowerShell-compatible syntax
+        // File is uncompressed. Use shell redirection first (works in cmd/bash),
+        // then fall back to pipe commands per platform.
         if (getArgs().debug) {
           log.info(`🚀 Importing uncompressed file`);
-          log.info(`⚡ Using PowerShell-compatible import method`);
+          log.info(`⚡ Using direct shell import method`);
         }
 
         try {
-          // Use Get-Content for PowerShell compatibility
-          const cmd = `Get-Content "${dump}" | ${buildImportCommand(env)}`;
+          const cmd = `${buildImportCommand(env)} < "${dump}"`;
           await runLocal({ cmd, spinner: `Importing database from ${dump}` });
           log.success(`✅ Uncompressed import succeeded!`);
         } catch (error) {
-          log.warn(`❌ PowerShell method failed: ${error.message}`);
+          log.warn(`❌ Direct import method failed: ${error.message}`);
 
-          // Fallback to type command for Windows
           try {
-            const cmd = `type "${dump}" | ${buildImportCommand(env)}`;
+            const fallbackCmd =
+              process.platform === "win32"
+                ? `type "${dump}" | ${buildImportCommand(env)}`
+                : `cat "${dump}" | ${buildImportCommand(env)}`;
+
             await runLocal({
-              cmd,
+              cmd: fallbackCmd,
               spinner: `Importing database from ${dump} (fallback)`,
             });
             log.success(`✅ Fallback import succeeded!`);
           } catch (fallbackError) {
             throw new Error(
-              `Both PowerShell and CMD import methods failed: ${error.message}, ${fallbackError.message}`,
+              `Both direct and fallback import methods failed: ${error.message}, ${fallbackError.message}`,
             );
           }
         }
