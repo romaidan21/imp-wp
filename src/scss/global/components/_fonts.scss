@@ -1,9 +1,8 @@
 @use "utils" as *;
 
 // Font-faces
-@include font-face("NotoSans-Regular", "NotoSans-Regular", 400);
-@include font-face("NotoSans-Medium", "NotoSans-Medium", 500);
-@include font-face("NotoSans-SemiBold", "NotoSans-SemiBold", 600);
+@include font-face("Montserrat Variable", "Montserrat-Variable", 100 900);
+@include font-face("Roboto", "Roboto-400", 400);
 
 body,
 p {

@@ -1,4 +1,6 @@
 <?php
 
-renderSection('intro');
-
+renderSection('hero');
+renderSection('practices');
+renderSection('advantages');
+renderSection('latest-news');

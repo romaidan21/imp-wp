@@ -15,15 +15,15 @@ section {
 }
 
 // Section inner container
-.container {
-  position: relative;
-  width: 100%;
-  max-width: var(--max-width);
-  padding-inline: min-max(24, 36);
-  @include grid(24, min-max(16, 24));
+// .container {
+//   position: relative;
+//   width: 100%;
+//   max-width: var(--max-width);
+//   padding-inline: min-max(24, 36);
+//   @include grid(24, min-max(16, 24));
 
-  @include mq-max-768 {
-    @include flex(column);
-    padding-inline: 16px;
-  }
-}
+//   @include mq-max-768 {
+//     @include flex(column);
+//     padding-inline: 16px;
+//   }
+// }

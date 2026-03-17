@@ -3,4 +3,4 @@
 global $tpl_assets;
 $tpl_assets = 'page-404';
 
-renderPage('page404');
+renderPage('404');
