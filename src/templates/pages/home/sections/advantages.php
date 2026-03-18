@@ -1,36 +1,33 @@
-<section class="home-advantages">
-  <div class="home-advantages__watermark" aria-hidden="true">
-    <span class="home-advantages__watermark-icon"></span>
-  </div>
-  <div class="container home-advantages__container">
+<section class="advantages" data-theme="dark">
+  <div class="container advantages__container">
     <div class="section-heading">
-      <h2 class="section-heading__title section-heading__title--light">Чому обирають нас</h2>
-      <div class="section-heading__divider"></div>
+      <h2 class="font-48">Чому обирають нас</h2>
+      <div class="divider"></div>
     </div>
 
-    <div class="home-advantages__grid">
-      <div class="home-advantages__item">
-        <div class="home-advantages__icon"><span aria-hidden="true">D</span></div>
-        <h3 class="home-advantages__title">Досвід у складних справах</h3>
-        <p class="home-advantages__text">Ми успішно вирішуємо найскладніші юридичні завдання.</p>
+    <div class="grid mt-lg">
+      <div class="item">
+        <div class="icon flex-c">D</div>
+        <h3 class="title font-22">Досвід у складних справах</h3>
+        <p class="text">Ми успішно вирішуємо найскладніші юридичні завдання.</p>
       </div>
 
-      <div class="home-advantages__item">
-        <div class="home-advantages__icon"><span aria-hidden="true">M</span></div>
-        <h3 class="home-advantages__title">Міжнародні контракти</h3>
-        <p class="home-advantages__text">Супровід зовнішньоекономічної діяльності.</p>
+      <div class="item">
+        <div class="icon flex-c">M</div>
+        <h3 class="title font-22">Міжнародні контракти</h3>
+        <p class="text">Супровід зовнішньоекономічної діяльності.</p>
       </div>
 
-      <div class="home-advantages__item">
-        <div class="home-advantages__icon"><span aria-hidden="true">I</span></div>
-        <h3 class="home-advantages__title">Індивідуальний підхід</h3>
-        <p class="home-advantages__text">Глибоке занурення в специфіку бізнесу клієнта.</p>
+      <div class="item">
+        <div class="icon flex-c">I</div>
+        <h3 class="title font-22">Індивідуальний підхід</h3>
+        <p class="text">Глибоке занурення в специфіку бізнесу клієнта.</p>
       </div>
 
-      <div class="home-advantages__item">
-        <div class="home-advantages__icon"><span aria-hidden="true">K</span></div>
-        <h3 class="home-advantages__title">Конфіденційність</h3>
-        <p class="home-advantages__text">Абсолютна безпека ваших даних та інформації.</p>
+      <div class="item">
+        <div class="icon flex-c">K</div>
+        <h3 class="title font-22">Конфіденційність</h3>
+        <p class="text">Абсолютна безпека ваших даних та інформації.</p>
       </div>
     </div>
   </div>

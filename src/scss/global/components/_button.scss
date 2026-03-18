@@ -6,15 +6,28 @@
   align-items: center;
   font-family: var(--font-mont);
   font-weight: 500;
-  font-size: min-max(16, 18);
-  padding: min-max(12, 16) min-max(16, 24);
+  font-size: min-max(15, 18);
+  padding: min-max(12, 16) min-max(16, 32);
   border-radius: min-max(6, 8);
+
+  &.empty {
+    padding: 0;
+  }
 
   &.gold {
     background: var(--color-accent);
 
     @include on-hover {
       background: var(--color-accent-soft);
+    }
+  }
+
+  &.stroke {
+    border: 1px solid currentColor;
+
+    @include on-hover {
+      background: var(--color-main);
+      color: var(--color-white);
     }
   }
 }

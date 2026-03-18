@@ -1,8 +1,8 @@
 <section class="about-principles" aria-labelledby="about-principles-title">
   <div class="container">
-    <div class="section-heading section-heading--center about-principles__heading">
+    <div class="section-heading centered about-principles__heading">
       <h2 id="about-principles-title" class="about-principles__section-title">Наші принципи роботи</h2>
-      <div class="section-heading__divider"></div>
+      <div class="divider"></div>
     </div>
 
     <div class="about-principles__list">

@@ -5,35 +5,6 @@
   padding-bottom: 6rem;
 }
 
-.section-heading {
-  margin-bottom: 4rem;
-}
-
-.section-heading--center {
-  text-align: center;
-}
-
-.section-heading__title {
-  margin-bottom: 1rem;
-  font-size: clamp(2rem, 1.4rem + 1.9vw, 2.9rem);
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-.section-heading__title--light {
-  color: #ffffff;
-}
-
-.section-heading__divider {
-  width: 4rem;
-  height: 0.25rem;
-  background: var(--color-accent);
-}
-
-.section-heading--center .section-heading__divider {
-  margin-inline: auto;
-}
-
 .page-header {
   position: relative;
   overflow: hidden;

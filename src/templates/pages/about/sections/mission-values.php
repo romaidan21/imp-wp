@@ -1,8 +1,8 @@
 <section class="about-mission" aria-labelledby="about-mission-title">
   <div class="container">
-    <div class="section-heading section-heading--center about-mission__heading">
-      <h2 id="about-mission-title" class="section-heading__title">Місія та цінності</h2>
-      <div class="section-heading__divider"></div>
+    <div class="section-heading centered about-mission__heading">
+      <h2 id="about-mission-title" class="title font-48">Місія та цінності</h2>
+      <div class="divider"></div>
     </div>
     <div class="about-mission__grid">
       <article class="about-mission__panel">

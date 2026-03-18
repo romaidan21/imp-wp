@@ -115,3 +115,11 @@ function debug_data($data, $exit = true)
   echo "</pre>";
   if ($exit) exit;
 }
+
+function renderTempImage($name)
+{
+  if (wp_get_environment_type() !== 'local') {
+    $name = preg_replace('/\.png$/i', '.webp', $name);
+  }
+  echo "<img src= \"" . getAssets("img/temp/" . $name) . "\" alt='Temporary Image' />";
+}

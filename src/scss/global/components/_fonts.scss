@@ -8,3 +8,17 @@ body,
 p {
   // @include extatica-100; // add general font styles
 }
+
+.font-60 {
+  @include use-font(var(--font-mont), (32, 72), 700, 125%);
+}
+.font-48 {
+  @include use-font(var(--font-mont), (24, 48), 700, 125%);
+}
+
+.font-24 {
+  @include use-font(var(--font-roboto), (18, 24), 400, 125%);
+}
+.font-22 {
+  @include use-font(var(--font-mont), (16, 22), 700, 115%);
+}

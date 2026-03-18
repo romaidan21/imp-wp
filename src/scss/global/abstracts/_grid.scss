@@ -1,25 +1,6 @@
 @use "utils" as *;
 // Grids
-$columns-12: 12;
-$columns-24: 24;
-
 .grid {
-  --cols: 24;
-  @include grid(var(--cols), min-max(8, 20));
-}
-
-@for $i from 1 through 24 {
-  // Grid column
-  .col-start-#{$i} {
-    grid-column-start: #{$i};
-  }
-  .col-span-#{$i} {
-    grid-column-end: span #{$i};
-  }
-
-  @if $i < 10 {
-    .col-size-#{$i} {
-      grid-column: #{$i} / #{-1 * $i};
-    }
-  }
+  --cols: 12;
+  @include grid(var(--cols), min-max(16, 32));
 }
