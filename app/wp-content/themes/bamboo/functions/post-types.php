@@ -19,7 +19,7 @@ function createBamooCustomPosts()
     'has_archive'   => true,
     'show_in_rest'  => true,
     'menu_position' => 4,
-    'menu_icon'     => 'dashicons-admin-post',
+    'menu_icon'     => 'dashicons-welcome-write-blog',
     'supports'      => ['title', 'editor', 'excerpt', 'thumbnail', 'author']
   ]);
 
@@ -32,6 +32,23 @@ function createBamooCustomPosts()
     'public'            => true,
     'hierarchical'      => true,
     'show_in_rest'      => true,
+  ]);
+
+  register_post_type('services', [
+    'labels'        => [
+      'name'           => __('Послуги', 'bamboo'),
+      'all_items'      => __('Усі послуги', 'bamboo'),
+      'name_admin_bar' => __('Послуги', 'bamboo'),
+      'singular_name'  => __('Послуга', 'bamboo'),
+      'add_new'        => __('Додати послугу', 'bamboo'),
+      'add_new_item'   => __('Додати послугу', 'bamboo')
+    ],
+    'public'        => true,
+    'has_archive'   => true,
+    'show_in_rest'  => true,
+    'menu_position' => 5,
+    'menu_icon'     =>  'dashicons-money',
+    'supports'      => ['title', 'editor', 'excerpt', 'thumbnail',]
   ]);
 
   // register_taxonomy('articles_tag', ['articles'], [

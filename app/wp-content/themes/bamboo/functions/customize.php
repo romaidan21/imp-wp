@@ -13,10 +13,10 @@ function customizeTheme()
   ]);
 
   // Register menu(s)
-  // register_nav_menus([
-  // 'header_menu' => 'Header menu',
-  // 'footer_menu' => 'Footer menu',
-  // ]);
+  register_nav_menus([
+    'header_menu' => 'Header menu',
+    'footer_menu' => 'Footer menu',
+  ]);
 
   // Load textdomain
   // load_theme_textdomain('bamboo', get_template_directory() . '/languages');

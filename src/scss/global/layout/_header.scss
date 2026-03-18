@@ -29,10 +29,30 @@
     display: flex;
     align-items: center;
     gap: min-max(16, 24);
+    min-width: 75%;
+    justify-content: flex-start;
+    position: relative;
 
-    a {
-      @include on-hover {
-        color: var(--color-accent);
+    li {
+      list-style: none;
+
+      &:not(.order) {
+        a {
+          @include on-hover {
+            color: var(--color-accent);
+          }
+        }
+      }
+    }
+
+    .order {
+      position: absolute;
+      right: 0;
+      transition: var(--transition);
+      padding: 0;
+
+      a {
+        padding: min-max(12, 16) min-max(16, 32);
       }
     }
   }
