@@ -3,16 +3,37 @@
 *::before,
 *::after {
   min-width: 0;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-/* Reset list styles */
-ul,
-ol,
-menu {
-  list-style: none;
+.the_content {
+  > * {
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  * {
+    margin: revert;
+    padding: revert;
+  }
+
+  figure {
+    margin: 0 0 1em;
+  }
+
+  a {
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--error-100);
+    }
+  }
 }
 
 button {
@@ -21,13 +42,18 @@ button {
   padding: 0;
   margin: 0;
   cursor: pointer;
-  color: inherit;
+  color: currentColor;
+  transition: var(--transition);
+  transition-property: color, background-color, opacity;
+  font: inherit;
 }
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: currentColor;
   transition: var(--transition);
+  transition-property: color, background-color, opacity;
+  font: inherit;
 }
 
 mark {

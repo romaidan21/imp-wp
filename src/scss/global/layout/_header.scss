@@ -1,3 +1,43 @@
 @use "utils" as *;
 
-.header {}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // background: var(--color-main);
+  color: var(--color-white);
+
+  .container {
+    align-items: center;
+    min-height: min-max(60, 100);
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .logo {
+    width: min-max(60, 100);
+    aspect-ratio: 2/1;
+    background: var(--color-white);
+  }
+
+  .pages {
+    display: flex;
+    align-items: center;
+    gap: min-max(16, 24);
+
+    a {
+      @include on-hover {
+        color: var(--color-accent);
+      }
+    }
+  }
+
+  .mobile-toggle {
+    display: none;
+  }
+}

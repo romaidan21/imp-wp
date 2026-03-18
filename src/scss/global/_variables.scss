@@ -1,58 +1,36 @@
 :root {
-  // Layout
-  --max-width: 1920px;
+  --font-roboto: "Roboto", sans-serif;
+  --font-mont: "Montserrat Variable", sans-serif;
 
-  // Accented colors
-  --Brand: #ffe317;
-  --BrandDarker: #f0cd18;
+  --color-main: #1c436b;
+  --color-main-dark: #1f2d3d;
 
-  --SecondaryBackground: rgba(243, 244, 244, 1);
-  --TertiaryBackground: #e0e2e3;
+  --color-white: #ffffff;
 
-  /* Light Colors */
-  --1-Light: #ffffff;
-  --2-Light: #f3f4f4;
-  --3-Light: #e0e2e3;
-  --4-Light: rgba(255, 255, 255, 0.05);
-  --5-Light: rgba(255, 255, 255, 0.1);
-  --6-Light: rgba(255, 255, 255, 0.15);
-  --7-Light: rgba(255, 255, 255, 0.3);
-  --8-Light: rgba(255, 255, 255, 0.5);
-  --9-Light: rgba(255, 255, 255, 0.8);
+  --color-secondary: #f2f6fa;
 
-  /* Dark Colors */
-  --1-Dark: #303e40;
-  --2-Dark: #263233;
-  --3-Dark: #222c2d;
-  --4-Dark: rgba(48, 62, 64, 0.05);
-  --5-Dark: rgba(48, 62, 64, 0.1);
-  --6-Dark: rgba(48, 62, 64, 0.15);
-  --7-Dark: rgba(48, 62, 64, 0.3);
-  --8-Dark: rgba(48, 62, 64, 0.5);
-  --9-Dark: rgba(48, 62, 64, 0.8);
+  --color-accent: #d8a93d;
+  --color-accent-soft: #ebc977;
 
-  // Additional Colors
-  --Success: #248e70;
-  --Error: #ac2f2f;
-  --ErrorBg: #ac2f2f 30%;
-  --Destructive: #762323;
+  --color-muted: #eef3f8;
+  --color-muted-foreground: #5d6b7a;
 
-  // Fonts
-  --sen-bold: "Sen-Bold", sans-serif;
-  --sen-semibold: "Sen-SemiBold", sans-serif;
-  --sen-medium: "Sen-Medium", sans-serif;
-  --sen-regular: "Sen-Regular", sans-serif;
+  --color-border: #d9e2eb;
+
+  --color-danger: #d94848;
+
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+
+  --shadow-sm: 0 8px 16px rgba(18, 34, 53, 0.06);
+  --shadow-md: 0 14px 28px rgba(18, 34, 53, 0.1);
+  --shadow-lg: 0 20px 42px rgba(18, 34, 53, 0.16);
 
   // Effects
   --transition: 0.3s ease;
   --transition-medium: 0.45s ease-in-out;
   --transition-slow: 0.9s cubic-bezier(0.25, 1, 0.5, 1);
-
-
-  // Font Sizes
-  --min-font-lg: 54px;
-
-  @media (max-width: 768px) {
-    --min-font-lg: 44px;
-  }
 }

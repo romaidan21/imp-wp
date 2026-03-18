@@ -45,11 +45,10 @@
   }
 }
 
-
 // Hover only for pointer / parent
 @mixin on-hover($parent: null) {
   @media (hover: hover) {
-    &:hover {
+    &:hover:not(:disabled) {
       @content;
     }
     @if $parent {

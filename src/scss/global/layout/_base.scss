@@ -7,23 +7,41 @@ body {
   // @include no-scrollbar;
 }
 
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-roboto);
+  background: var(--color-white);
+  color: var(--color-main);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
 // Sections
 section {
   display: flex;
   justify-content: center;
-  color: var(--main-color);
+
+  .container {
+    padding-block: min-max(60, 140);
+  }
+
+  &:first-child {
+    padding-top: min-max(60, 100);
+  }
 }
 
 // Section inner container
-// .container {
-//   position: relative;
-//   width: 100%;
-//   max-width: var(--max-width);
-//   padding-inline: min-max(24, 36);
-//   @include grid(24, min-max(16, 24));
+.container {
+  position: relative;
+  width: 100%;
+  max-width: min-max(1600, 1800);
+  padding-inline: min-max(24, 100);
 
-//   @include mq-max-768 {
-//     @include flex(column);
-//     padding-inline: 16px;
-//   }
-// }
+  display: flex;
+  flex-direction: column;
+
+  @include mq-max-768 {
+    // padding-inline: 16px;
+  }
+}

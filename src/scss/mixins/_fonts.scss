@@ -1,8 +1,1 @@
 @use "core" as *;
-
-@mixin Sen-120-SemiBold {
-  @include use-font(var(--sen-semibold), (var(--min-font-lg), 120), 600, 110%);
-}
-@mixin Sen-70-SemiBold {
-  @include use-font(var(--sen-semibold), (38, 70), 600, 110%, 0.7px);
-}
