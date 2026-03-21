@@ -5,4 +5,3 @@ renderSection('>hero', [
 ]);
 
 renderSection('info');
-renderSection('map');

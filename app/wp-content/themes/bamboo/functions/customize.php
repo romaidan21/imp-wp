@@ -47,8 +47,8 @@ function addDashboardStyles()
 // Add contact info to admin
 add_action('acf/init', function () {
   acf_add_options_page(array(
-    'page_title' => 'Our contacts',
-    'menu_title' => 'Our contacts',
+    'page_title' => 'Наші контакти',
+    'menu_title' => 'Наші контакти',
     'menu_slug'  => 'contacts-settings',
     'icon_url'   => 'dashicons-email-alt2',
     'position'   => 60,
