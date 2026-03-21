@@ -123,3 +123,12 @@ function renderTempImage($name)
   }
   echo "<img src= \"" . getAssets("img/temp/" . $name) . "\" alt='Temporary Image' />";
 }
+
+function get_page_fields($path = '')
+{
+  $page = get_page_by_path($path);
+  if (!$page) return [];
+
+  $page_id = apply_filters('wpml_object_id', $page->ID ?? '', 'page', TRUE);
+  return get_field('pageContent', $page_id);
+}

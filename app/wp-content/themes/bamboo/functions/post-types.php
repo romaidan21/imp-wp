@@ -48,24 +48,8 @@ function createBamooCustomPosts()
     'show_in_rest'  => true,
     'menu_position' => 5,
     'menu_icon'     =>  'dashicons-money',
-    'supports'      => ['title', 'editor', 'excerpt', 'thumbnail',]
+    'supports'      => ['title', 'editor', 'excerpt', 'thumbnail', 'author', 'comments', 'revisions', 'custom-fields']
   ]);
-
-  // register_taxonomy('articles_tag', ['articles'], [
-  //   'labels' => [
-  //     'name'           => __('Tags articles', 'bamboo'),
-  //     'all_items'      => __('All Tags', 'bamboo'),
-  //     'name_admin_bar' => __('Tags', 'bamboo'),
-  //     'singular_name'  => __('Tag', 'bamboo'),
-  //     'add_new'        => __('Add Tag', 'bamboo'),
-  //     'add_new_item'   => __('Add Tag', 'bamboo')
-  //   ],
-  //   'publicly_queryable' => false,
-  //   'show_admin_column' => true,
-  //   'public'            => true,
-  //   'hierarchical'      => true,
-  //   'show_in_rest'      => true,
-  // ]);
 }
 
 /*** Remove Default Post Type ***/

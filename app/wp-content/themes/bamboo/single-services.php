@@ -4,8 +4,8 @@ global $tpl_assets;
 
 $tpl_assets = [
   'css' => [
-    'page-404',
+    'single-services',
   ],
 ];
 
-renderPage('404');
+renderPage('single/services');
