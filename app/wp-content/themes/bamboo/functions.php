@@ -33,4 +33,4 @@ require_once get_template_directory() . '/functions/seo.php';
 // require_once get_template_directory() . '/functions/smtp.php';
 
 // CF7 settings
-// require_once get_template_directory() . '/functions/cf7-settings.php';
+require_once get_template_directory() . '/functions/cf7-settings.php';

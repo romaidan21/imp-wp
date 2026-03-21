@@ -13,9 +13,7 @@ $menu = wp_nav_menu([
 
 <header class="header">
   <div class="container">
-    <a href="/" class="logo" aria-label="IMP Law Office">
-
-    </a>
+    <?php renderLogo(false) ?>
 
     <?php echo $menu; ?>
 

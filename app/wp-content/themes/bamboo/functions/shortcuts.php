@@ -17,9 +17,9 @@ function getAssets($path = '')
 }
 
 // Show custom logo (linked on all pages)
-function renderLogo(string $logo_path = "img/logo")
+function renderLogo($render = true)
 {
-  $logo_path = apply_filters('renderLogo', $logo_path);
+  $logo_path = apply_filters('renderLogo', "img/logo");
   $home_url = home_url();
   $blog_title = get_bloginfo('title');
 
@@ -29,9 +29,11 @@ function renderLogo(string $logo_path = "img/logo")
     echo 'aria-current="page" ';
   }
 
-  echo 'aria-label="' . esc_attr($blog_title) . '"><div class="svg-icon" role="img" aria-hidden="true" focusable="false">';
-  renderSVG($logo_path);
-  echo '</div></a>';
+  echo 'aria-label="' . esc_attr($blog_title) . '">';
+  if ($render) {
+    renderSVG($logo_path);
+  }
+  echo '</a>';
 }
 
 // Show short menu version (only a href tags)

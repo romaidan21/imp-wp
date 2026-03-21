@@ -1,0 +1,15 @@
+@use "utils" as *;
+
+.hero-intro {
+  background: var(--color-main-gradient);
+
+  .subtitle {
+    opacity: 0.8;
+    margin-top: 0.5em;
+    max-width: min-max(1000, 1200);
+  }
+
+  .divider {
+    margin-top: 2em;
+  }
+}

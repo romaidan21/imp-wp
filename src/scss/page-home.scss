@@ -12,6 +12,10 @@
     text-align: center;
   }
 
+  .main-logo {
+    width: min-max(140, 280);
+    margin-bottom: min-max(30, 60);
+  }
   .subtitle {
     width: 100%;
     max-width: min-max(500, 600);
@@ -43,44 +47,6 @@
 
   .grid {
     --cols: 3;
-  }
-
-  .card {
-    align-items: center;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: rgba(242, 246, 250, 0.7);
-    padding: min-max(24, 48) min-max(16, 32);
-    text-align: center;
-
-    .icon {
-      width: min-max(52, 64);
-      aspect-ratio: 1;
-      flex: none;
-      background: var(--color-main);
-      color: #ffffff;
-      border-radius: 50%;
-    }
-
-    @include on-hover {
-      border-color: rgba(28, 67, 107, 0.22);
-      background: #ffffff;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .title {
-      margin-top: 1em;
-    }
-
-    .text {
-      margin-top: 1em;
-      color: var(--color-muted-foreground);
-    }
-
-    .cta {
-      margin-top: 2em;
-      color: var(--color-accent);
-    }
   }
 }
 

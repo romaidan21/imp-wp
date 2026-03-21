@@ -1,17 +1,8 @@
 <?php
+renderSection('>hero', [
+  'title' => 'Контакти',
+  'subtitle' => 'Готові обговорити вашу справу. Зв\'яжіться з нами зручним для вас способом.',
+]);
 
-?>
-<div class="contact-page page-shell">
-  <?php renderSection('header'); ?>
-
-  <div class="container contact-page__content">
-    <div class="contact-page__grid">
-      <?php
-      renderSection('info');
-      renderSection('form');
-      ?>
-    </div>
-
-    <?php renderSection('map'); ?>
-  </div>
-</div>
+renderSection('info');
+renderSection('map');

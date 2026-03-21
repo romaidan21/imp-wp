@@ -12,4 +12,4 @@
 
 <body <?php body_class(); ?>>
   <?php renderLayout('header'); ?>
-  <main class="site-main">
+  <main>

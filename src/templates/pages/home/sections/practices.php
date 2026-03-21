@@ -5,33 +5,37 @@
       <div class="divider"></div>
     </div>
 
+    <?php
+    $practices = [
+      [
+        'href' => '/services/corporate-law',
+        'icon' => 'KP',
+        'title' => 'Корпоративне право',
+        'description' => 'Комплексний юридичний супровід та захист інтересів у даній сфері.',
+        'cta_text' => 'Читати далі',
+      ],
+      [
+        'href' => '/services/commercial-law',
+        'icon' => 'GP',
+        'title' => 'Господарське право',
+        'description' => 'Комплексний юридичний супровід та захист інтересів у даній сфері.',
+        'cta_text' => 'Читати далі',
+      ],
+      [
+        'href' => '/services/court-representation',
+        'icon' => 'SP',
+        'title' => 'Судове представництво',
+        'description' => 'Комплексний юридичний супровід та захист інтересів у даній сфері.',
+        'cta_text' => 'Читати далі',
+      ],
+    ];
+    ?>
     <div class="grid mt-lg">
-      <div>
-        <a class="card flex-v" href="/services/corporate-law">
-          <div class="icon flex-c">KP</div>
-          <h3 class="title font-22">Корпоративне право</h3>
-          <p class="text">Комплексний юридичний супровід та захист інтересів у даній сфері.</p>
-          <span class="cta empty">Читати далі</span>
-        </a>
-      </div>
-
-      <div>
-        <a class="card flex-v" href="/services/commercial-law">
-          <div class="icon flex-c">GP</div>
-          <h3 class="title font-22">Господарське право</h3>
-          <p class="text">Комплексний юридичний супровід та захист інтересів у даній сфері.</p>
-          <span class="cta empty">Читати далі</span>
-        </a>
-      </div>
-
-      <div>
-        <a class="card flex-v" href="/services/court-representation">
-          <div class="icon flex-c">SP</div>
-          <h3 class="title font-22">Судове представництво</h3>
-          <p class="text">Комплексний юридичний супровід та захист інтересів у даній сфері.</p>
-          <span class="cta empty">Читати далі</span>
-        </a>
-      </div>
+      <?php foreach ($practices as $practice): ?>
+        <div>
+          <?php renderComponent('card-service', $practice); ?>
+        </div>
+      <?php endforeach; ?>
     </div>
 
     <div class="actions flex-c mt-lg">

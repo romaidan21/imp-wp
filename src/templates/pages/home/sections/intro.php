@@ -5,7 +5,10 @@
   </div>
 
   <div class="container ">
-    <h1 class="font-60">Адвокатське Бюро <br /> «Ігор Мельник та Партнери»</h1>
+
+    <div class="main-logo"></div>
+
+    <h1 class="font-72">Адвокатське Бюро <br /> «Ігор Мельник та Партнери»</h1>
     <p class="subtitle font-24">Ваш надійний юридичний радник у складних справах.</p>
     <div class="actions">
       <a href="/contacts" class="cta gold">Замовити консультацію</a>

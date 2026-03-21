@@ -45,7 +45,7 @@ a {
   cursor: pointer;
   color: currentColor;
   transition: var(--transition);
-  transition-property: color, background-color, opacity, box-shadow;
+  transition-property: color, background-color, opacity, box-shadow, transform, border;
   text-decoration: none;
 
   font: inherit;

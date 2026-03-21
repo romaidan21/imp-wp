@@ -4,21 +4,29 @@
 @include font-face("Montserrat Variable", "Montserrat-Variable", 100 900);
 @include font-face("Roboto", "Roboto-400", 400);
 
-body,
 p {
-  // @include extatica-100; // add general font styles
+  font: inherit;
 }
 
-.font-60 {
+.font-72 {
   @include use-font(var(--font-mont), (32, 72), 700, 125%);
+}
+.font-60 {
+  @include use-font(var(--font-mont), (28, 60), 700, 115%);
 }
 .font-48 {
   @include use-font(var(--font-mont), (24, 48), 700, 125%);
 }
 
+.font-28 {
+  @include use-font(var(--font-mont), (20, 28), 700, 125%);
+}
 .font-24 {
   @include use-font(var(--font-roboto), (18, 24), 400, 125%);
 }
 .font-22 {
   @include use-font(var(--font-mont), (16, 22), 700, 115%);
+}
+.font-18 {
+  @include use-font(var(--font-roboto), (16, 18), 400, 115%);
 }

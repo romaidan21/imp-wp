@@ -1,28 +1,28 @@
-<section class="about-mission" aria-labelledby="about-mission-title">
+<section class="mission">
   <div class="container">
-    <div class="section-heading centered about-mission__heading">
-      <h2 id="about-mission-title" class="title font-48">Місія та цінності</h2>
+    <div class="section-heading centered">
+      <h2 class="title font-48">Місія та цінності</h2>
       <div class="divider"></div>
     </div>
-    <div class="about-mission__grid">
-      <article class="about-mission__panel">
-        <h3 class="about-mission__subtitle">
-          <span class="about-mission__subtitle-line"></span> Місія
+    <div class="grid mt-lg">
+      <article class="panel">
+        <h3 class="title font-28">
+          <span class="title-line"></span> Місія
         </h3>
-        <div class="about-mission__content">
-          <p class="about-mission__text">Надавати бездоганну юридичну підтримку бізнесу, захищаючи інтереси клієнтів за допомогою інноваційних правових рішень та глибокої експертизи.</p>
-          <p class="about-mission__text">Ми прагнемо формувати високі стандарти надання юридичних послуг в Україні.</p>
+        <div class="the_content content">
+          <p>Надавати бездоганну юридичну підтримку бізнесу, захищаючи інтереси клієнтів за допомогою інноваційних правових рішень та глибокої експертизи.</p>
+          <p>Ми прагнемо формувати високі стандарти надання юридичних послуг в Україні.</p>
         </div>
       </article>
 
-      <article class="about-mission__panel">
-        <h3 class="about-mission__subtitle">
-          <span class="about-mission__subtitle-line"></span> Цінності
+      <article class="panel">
+        <h3 class="title font-28">
+          <span class="title-line"></span> Цінності
         </h3>
-        <div class="about-mission__content">
-          <p class="about-mission__text">Професіоналізм. Постійне вдосконалення знань та навичок нашої команди.</p>
-          <p class="about-mission__text">Чесність. Відкриті та прозорі відносини з клієнтами на кожному етапі співпраці.</p>
-          <p class="about-mission__text">Результативність. Орієнтація на практичний результат, а не просто процес.</p>
+        <div class="the_content content">
+          <p>Професіоналізм. Постійне вдосконалення знань та навичок нашої команди.</p>
+          <p>Чесність. Відкриті та прозорі відносини з клієнтами на кожному етапі співпраці.</p>
+          <p>Результативність. Орієнтація на практичний результат, а не просто процес.</p>
         </div>
       </article>
     </div>

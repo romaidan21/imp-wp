@@ -19,10 +19,8 @@
     justify-content: space-between;
   }
 
-  .logo {
-    width: min-max(60, 100);
-    aspect-ratio: 2/1;
-    background: var(--color-white);
+  .main-logo {
+    width: min-max(70, 120);
   }
 
   .pages {
@@ -32,6 +30,7 @@
     min-width: 75%;
     justify-content: flex-start;
     position: relative;
+    font-size: min-max(14, 18);
 
     li {
       list-style: none;
