@@ -1,13 +1,7 @@
-<?php
+  <?php
 
-?>
-<div class="events-page page-shell">
-  <?php renderSection('header'); ?>
-
-  <div class="container">
-    <?php
-    renderSection('filters');
-    renderSection('list');
-    ?>
-  </div>
-</div>
+  renderSection('>hero', [
+    'title' => 'Події та Аналітика',
+    'subtitle' => 'Аналітика законодавства, успішні кейси та поради для бізнесу.',
+  ]);
+  renderSection('posts');

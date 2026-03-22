@@ -20,20 +20,13 @@ $args = get_field('footer', 'options');
     <div class="grid">
       <div class="brand flex-v">
         <div class="logo fit-cover">
-
-          <?php echo wp_get_attachment_image($args['logo'] ?? '', 'full', false, [
-            'loading' => 'lazy',
-          ]) ?>
-
+          <?php echo wp_get_attachment_image($args['logo'] ?? '', 'full', false, ['loading' => 'lazy',]) ?>
         </div>
-
         <p class="brand-description"><?php echo esc_html($args['text'] ?? ''); ?></p>
         <?php renderComponent('socials', $args); ?>
       </div>
 
-
       <?php echo $menu; ?>
-
 
 
       <div class="column">

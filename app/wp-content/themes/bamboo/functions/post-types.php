@@ -25,13 +25,13 @@ function createBamooCustomPosts()
 
   register_taxonomy('blog_category', ['blog'], [
     'labels' => [
-      'name' => 'Категорії статей',
+      'name' => 'Категорії',
     ],
-    'publicly_queryable' => false,
     'show_admin_column' => true,
     'public'            => true,
     'hierarchical'      => true,
     'show_in_rest'      => true,
+    'rewrite' => ['slug' => 'blog/category', 'with_front' => false, 'hierarchical' => false],
   ]);
 
   register_post_type('services', [

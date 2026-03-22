@@ -1,10 +1,3 @@
-<section class="news">
-  <div class="container">
-    <div class="section-heading">
-      <h2 class="title font-48">Останні новини</h2>
-      <div class="divider"></div>
-    </div>
-
     <?php
     $articles = [
       [
@@ -33,14 +26,29 @@
       ],
     ];
     ?>
-    <div class="grid mt-lg">
-      <?php foreach ($articles as $article) {
-        renderComponent('card-post', $article);
-      } ?>
-    </div>
 
-    <div class="actions flex-c mt-lg">
-      <a href="/events" class="cta stroke">Всі новини</a>
-    </div>
-  </div>
-</section>
+
+    <section class="posts">
+      <div class="container">
+        <div class="filters">
+          <div class="tags">
+            <button class="tag active">Всі</button>
+            <button class="tag">Аналітика</button>
+            <button class="tag">Кейси</button>
+            <button class="tag">Законодавство</button>
+            <button class="tag">Поради</button>
+          </div>
+          <div class="search">
+            <span class="search-icon" aria-hidden="true"></span>
+            <input placeholder="Пошук статей..." class="search-input" />
+          </div>
+        </div>
+
+        <div class="grid mt-lg">
+          <?php foreach ($articles as $article) {
+            renderComponent('card-post', $article);
+          } ?>
+        </div>
+
+      </div>
+    </section>

@@ -1,0 +1,62 @@
+@use "utils" as *;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400..800&display=swap");
+
+.hero-intro {
+  .date {
+    opacity: 0.6;
+  }
+
+  .subtitle {
+    padding: min-max(4, 8) min-max(8, 16);
+    border-left: min-max(2, 4) solid var(--color-accent);
+    opacity: 1;
+    margin-top: 1em;
+  }
+
+  .categories {
+    display: flex;
+    gap: min-max(8, 16);
+    margin-block: 0.5em 1em;
+
+    a {
+      font-family: var(--font-mont);
+      line-height: 100%;
+      color: var(--color-accent-soft);
+      border-radius: var(--radius-xs);
+      background: #d9e2eb2b;
+      padding: min-max(2, 4) min-max(4, 8);
+      font-size: min-max(12, 14);
+
+      @include on-hover {
+        background: hsla(210, 31%, 89%, 0.275);
+      }
+    }
+  }
+}
+
+.post-content {
+  .container {
+    max-width: min-max(1000, 1200);
+  }
+
+  .content {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    color: var(--color-main-dark);
+
+    a {
+      color: var(--color-main);
+
+      &:hover {
+        color: var(--color-accent);
+      }
+    }
+
+    * {
+      line-height: 150%;
+    }
+  }
+}

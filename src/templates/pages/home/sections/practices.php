@@ -32,9 +32,7 @@
     ?>
     <div class="grid mt-lg">
       <?php foreach ($practices as $practice): ?>
-        <div>
-          <?php renderComponent('card-service', $practice); ?>
-        </div>
+        <?php renderComponent('card-service', $practice); ?>
       <?php endforeach; ?>
     </div>
 
