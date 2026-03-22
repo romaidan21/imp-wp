@@ -6,32 +6,8 @@
     </div>
 
     <?php
-    $articles = [
-      [
-        'href' => '/events?id=1',
-        'tag' => 'Аналітика',
-        'date' => '24.02.2026',
-        'title' => 'Як зменшити ризики у договорах у 2026 році',
-        'excerpt' => 'Практичний чекліст для бізнесу перед підписанням господарських договорів.',
-        'cta_text' => 'Читати далі',
-      ],
-      [
-        'href' => '/events?id=2',
-        'tag' => 'Кейси',
-        'date' => '18.01.2026',
-        'title' => 'Успішне представництво у корпоративному спорі',
-        'excerpt' => 'Кейс: захист прав учасника товариства та відновлення корпоративного управління.',
-        'cta_text' => 'Читати далі',
-      ],
-      [
-        'href' => '/events?id=3',
-        'tag' => 'Законодавство',
-        'date' => '05.12.2025',
-        'title' => 'Ключові зміни законодавства для роботодавців',
-        'excerpt' => 'Огляд оновлень, що впливають на HR-процеси, трудові договори та комплаєнс.',
-        'cta_text' => 'Читати далі',
-      ],
-    ];
+    $articles = BambooPosts::getBlogPosts(['posts_per_page' => 3]);
+
     ?>
     <div class="grid mt-lg">
       <?php foreach ($articles as $article) {
@@ -40,7 +16,7 @@
     </div>
 
     <div class="actions flex-c mt-lg">
-      <a href="/events" class="cta stroke">Всі новини</a>
+      <a href="/blog" class="cta stroke">Всі новини</a>
     </div>
   </div>
 </section>

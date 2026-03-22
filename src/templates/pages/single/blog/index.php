@@ -1,6 +1,3 @@
-<?php
-
-?>
 <section class="hero-intro" data-theme="dark">
   <div class="container">
     <div class="section-heading">

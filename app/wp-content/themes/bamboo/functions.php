@@ -34,3 +34,7 @@ require_once get_template_directory() . '/functions/seo.php';
 
 // CF7 settings
 require_once get_template_directory() . '/functions/cf7-settings.php';
+
+
+// Posts
+require_once get_template_directory() . '/BambooCore/BambooPosts.php';
