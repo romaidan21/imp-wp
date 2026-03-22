@@ -57,6 +57,7 @@ section {
   width: 100%;
   align-items: flex-start;
   gap: min-max(12, 16);
+  z-index: 2;
 
   &.centered {
     align-items: center;
@@ -152,6 +153,11 @@ section {
     background: var(--color-main);
     color: #ffffff;
     border-radius: 50%;
+
+    img {
+      width: min-max(28, 32);
+      height: auto;
+    }
   }
 
   @include on-hover {

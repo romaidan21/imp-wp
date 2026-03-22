@@ -134,3 +134,12 @@ function get_page_fields($path = '')
   $page_id = apply_filters('wpml_object_id', $page->ID ?? '', 'page', TRUE);
   return get_field('pageContent', $page_id);
 }
+
+function cat_name($cpt = 'blog')
+{
+  $cpts = [
+    'blog' => 'blog_category'
+  ];
+
+  return $cpts[$cpt] ?? '';
+}

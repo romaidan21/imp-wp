@@ -20,4 +20,14 @@ class BambooPosts
       ]
     );
   }
+  public static function getServicePosts($args = [])
+  {
+    return get_posts(
+      [
+        'post_type' => 'services',
+        ...self::$default,
+        ...$args,
+      ]
+    );
+  }
 }

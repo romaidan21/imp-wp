@@ -89,3 +89,9 @@ function disable_wpautop_for_acf_wysiwyg($value, $post_id, $field)
   }
   return $value;
 }
+
+function custom_rewrite_rules()
+{
+  add_rewrite_rule('^blog/category/(.+)/?$', 'index.php?blog_category=$matches[1]', 'top');
+}
+add_action('init', 'custom_rewrite_rules');

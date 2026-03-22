@@ -32,6 +32,7 @@ function createBamooCustomPosts()
     'hierarchical'      => true,
     'show_in_rest'      => true,
     'rewrite' => ['slug' => 'blog/category', 'with_front' => false, 'hierarchical' => false],
+
   ]);
 
   register_post_type('services', [
@@ -48,7 +49,7 @@ function createBamooCustomPosts()
     'show_in_rest'  => true,
     'menu_position' => 5,
     'menu_icon'     =>  'dashicons-money',
-    'supports'      => ['title', 'editor', 'excerpt', 'thumbnail', 'author', 'comments', 'revisions', 'custom-fields']
+    'supports'      => ['title', 'excerpt', 'thumbnail',  'custom-fields']
   ]);
 }
 

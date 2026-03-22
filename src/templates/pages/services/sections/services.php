@@ -1,27 +1,5 @@
     <?php
-    $practices = [
-      [
-        'href' => '/services/corporate-law',
-        'icon' => 'KP',
-        'title' => 'Корпоративне право',
-        'description' => 'Комплексний юридичний супровід та захист інтересів у даній сфері.',
-        'cta_text' => 'Читати далі',
-      ],
-      [
-        'href' => '/services/commercial-law',
-        'icon' => 'GP',
-        'title' => 'Господарське право',
-        'description' => 'Комплексний юридичний супровід та захист інтересів у даній сфері.',
-        'cta_text' => 'Читати далі',
-      ],
-      [
-        'href' => '/services/court-representation',
-        'icon' => 'SP',
-        'title' => 'Судове представництво',
-        'description' => 'Комплексний юридичний супровід та захист інтересів у даній сфері.',
-        'cta_text' => 'Читати далі',
-      ],
-    ];
+    $posts = BambooPosts::getServicePosts();
     ?>
 
 
@@ -29,8 +7,8 @@
     <section class="services">
       <div class="container">
         <div class="grid ">
-          <?php foreach ($practices as $practice): ?>
-            <?php renderComponent('card-service', $practice); ?>
+          <?php foreach ($posts as $post): ?>
+            <?php renderComponent('card-service', $post); ?>
           <?php endforeach; ?>
         </div>
       </div>

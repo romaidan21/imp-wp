@@ -6,29 +6,7 @@
     </div>
 
     <?php
-    $practices = [
-      [
-        'href' => '/services/corporate-law',
-        'icon' => 'KP',
-        'title' => 'Корпоративне право',
-        'description' => 'Комплексний юридичний супровід та захист інтересів у даній сфері.',
-        'cta_text' => 'Читати далі',
-      ],
-      [
-        'href' => '/services/commercial-law',
-        'icon' => 'GP',
-        'title' => 'Господарське право',
-        'description' => 'Комплексний юридичний супровід та захист інтересів у даній сфері.',
-        'cta_text' => 'Читати далі',
-      ],
-      [
-        'href' => '/services/court-representation',
-        'icon' => 'SP',
-        'title' => 'Судове представництво',
-        'description' => 'Комплексний юридичний супровід та захист інтересів у даній сфері.',
-        'cta_text' => 'Читати далі',
-      ],
-    ];
+    $practices = BambooPosts::getServicePosts();
     ?>
     <div class="grid mt-lg">
       <?php foreach ($practices as $practice): ?>

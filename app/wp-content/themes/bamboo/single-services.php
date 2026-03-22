@@ -4,7 +4,7 @@ global $tpl_assets;
 
 $tpl_assets = [
   'css' => [
-    'single-services',
+    'single-post',
   ],
 ];
 
