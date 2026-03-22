@@ -13,7 +13,7 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     background: #ffffff;
-    padding: min-max(8, 16) min-max(16, 32);
+    padding: min-max(8, 24) min-max(16, 32);
     box-shadow: var(--shadow-sm);
   }
 
@@ -21,11 +21,12 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    width: 100%;
 
     .tag {
       border-radius: var(--radius-sm);
       background: var(--color-secondary);
-      padding: 0.52rem 1rem;
+      padding: min-max(6, 8) min-max(14, 16);
       color: var(--color-main);
       font-size: min-max(12, 14);
       font-family: var(--font-mont);
@@ -53,7 +54,7 @@
       top: 50%;
       background: var(--color-muted-foreground);
       transform: translateY(-50%);
-      width: min-max(16, 20);
+      width: min-max(18, 20);
       aspect-ratio: 1;
       mask: url("../img/search.svg") no-repeat center/cover;
     }
@@ -62,7 +63,7 @@
       border-radius: var(--radius-md);
       border: 2px solid transparent;
       background: var(--color-secondary);
-      padding: 1em 2.55rem;
+      padding: min-max(12, 16) min-max(36, 40);
       font-size: 16px;
       transition: var(--transition);
       outline: none;
@@ -77,56 +78,24 @@
         background: #ffffff;
       }
     }
-  }
 
-  &__empty-state {
-    padding: 4.5rem 1rem;
-    text-align: center;
-  }
-
-  &__empty-icon {
-    margin: 0 auto 1rem;
-    width: 4rem;
-    height: 4rem;
-    color: rgba(93, 107, 122, 0.35);
-  }
-
-  &__empty-title {
-    font-family: var(--font-roboto);
-    color: var(--color-main);
-    font-size: 1.25rem;
-    font-weight: 700;
-  }
-
-  &__empty-text {
-    margin-top: 0.4rem;
-    color: var(--color-muted-foreground);
-  }
-
-  &__read-button,
-  &__share-button {
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-  }
-
-  &__read-button {
-    color: var(--color-main);
-    font-size: 0.87rem;
-    font-weight: 600;
-    transition: color 0.18s ease;
-
-    &:hover {
-      color: var(--color-accent);
+    @include mq-max-768 {
+      width: 100%;
+      &-input {
+        width: 100%;
+      }
     }
   }
 
-  &__share-button {
-    color: var(--color-muted-foreground);
-    transition: color 0.18s ease;
+  @include mq-max-768 {
+    .grid {
+      --cols: 1;
+    }
 
-    &:hover {
-      color: var(--color-main);
+    .filters {
+      flex-direction: column;
+      padding: 16px;
+      gap: 24px;
     }
   }
 }

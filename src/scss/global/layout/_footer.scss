@@ -30,18 +30,23 @@
       display: flex;
       flex-direction: column;
       gap: min-max(16, 24);
+    }
 
-      > .sub-menu {
-        display: flex;
-        flex-direction: column;
-        gap: min-max(8, 16);
+    .sub-menu {
+      display: flex;
+      flex-direction: column;
+      gap: min-max(8, 16);
 
-        a {
-          color: rgba(255, 255, 255, 0.72);
+      a {
+        color: rgba(255, 255, 255, 0.72);
 
-          @include on-hover {
-            color: var(--color-accent);
-          }
+        &[aria-current] {
+          color: var(--color-accent);
+          pointer-events: none;
+        }
+
+        @include on-hover {
+          color: var(--color-accent);
         }
       }
     }
@@ -57,10 +62,10 @@
   }
 
   .brand {
-    gap: min-max(12, 24);
+    gap: min-max(16, 24);
 
     .logo {
-      width: min-max(75, 150);
+      width: min-max(90, 150);
       display: flex;
     }
 
@@ -87,7 +92,7 @@
       .row {
         display: flex;
         align-items: center;
-        gap: min-max(4, 8);
+        gap: min-max(8, 10);
       }
 
       .data {
@@ -101,7 +106,7 @@
       .icon {
         display: flex;
         flex: none;
-        width: min-max(20, 24);
+        width: min-max(24, 24);
         aspect-ratio: 1;
         background: var(--color-accent);
         mask-size: cover;
@@ -129,14 +134,24 @@
 
   .сopyright {
     display: flex;
-    font-size: min-max(12, 14);
+    font-size: min-max(11, 14);
     opacity: 0.8;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     padding-top: min-max(24, 32);
   }
 
   .social-icons {
-    margin-top: min-max(16, 24);
+    margin-top: min-max(8, 24);
+  }
+
+  @include mq-max-768 {
+    .grid,
+    .pages {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+    }
   }
 }
 
@@ -163,6 +178,24 @@
 
     @include on-hover {
       color: var(--color-accent);
+    }
+  }
+}
+
+nav.pages {
+  li:not(.order) {
+    a {
+      &[aria-current] {
+        color: var(--color-accent);
+        pointer-events: none;
+      }
+    }
+
+    &.current-menu-item {
+      a {
+        color: var(--color-accent) !important;
+        pointer-events: none;
+      }
     }
   }
 }

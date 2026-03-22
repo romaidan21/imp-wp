@@ -2,5 +2,5 @@
 // Grids
 .grid {
   --cols: 12;
-  @include grid(var(--cols), min-max(16, 32));
+  @include grid(var(--cols), min-max(16, 32), 16px);
 }

@@ -22,6 +22,9 @@ $menu = wp_nav_menu([
     <!-- <a href="/contacts" class="cta gold">Замовити консультацію</a> -->
 
     <button class="mobile-toggle" type="button" aria-label="Відкрити меню">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
   </div>
 </header>

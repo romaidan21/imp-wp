@@ -51,6 +51,21 @@ function createBamooCustomPosts()
     'menu_icon'     =>  'dashicons-money',
     'supports'      => ['title', 'excerpt', 'thumbnail',  'custom-fields']
   ]);
+  // Highlight menu item for custom post type archives
+  add_filter('nav_menu_css_class', function ($classes, $item) {
+    // Список ваших кастомних типів записів
+    $custom_post_types = array('blog', 'services');
+    // Якщо це archive сторінка кастомного типу
+    if (is_post_type_archive($custom_post_types)) {
+      // Отримуємо URL архіву
+      $archive_url = get_post_type_archive_link(get_post_type());
+      // Якщо пункт меню веде на archive цього типу
+      if (isset($item->url) && $item->url === $archive_url) {
+        $classes[] = 'current-menu-item';
+      }
+    }
+    return $classes;
+  }, 10, 2);
 }
 
 /*** Remove Default Post Type ***/

@@ -17,9 +17,11 @@
   &.gold {
     background: var(--color-accent);
     color: var(--color-white);
+    border: 1px solid var(--color-accent);
 
     @include on-hover {
       background: var(--color-accent-soft);
+      border-color: var(--color-accent-soft);
     }
   }
 

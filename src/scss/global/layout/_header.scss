@@ -59,4 +59,27 @@
   .mobile-toggle {
     display: none;
   }
+
+  @include mq-max-1080 {
+    .pages {
+      display: none;
+    }
+
+    .mobile-toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 30px;
+      aspect-ratio: 1;
+      align-items: center;
+      justify-content: center;
+      span {
+        border-radius: 10px;
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: var(--color-white);
+      }
+    }
+  }
 }

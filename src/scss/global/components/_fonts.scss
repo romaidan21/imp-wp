@@ -9,7 +9,7 @@ p {
 }
 
 .font-72 {
-  @include use-font(var(--font-mont), (32, 72), 700, 125%);
+  @include use-font(var(--font-mont), (30, 72), 700, 125%);
 }
 .font-60 {
   @include use-font(var(--font-mont), (28, 60), 700, 115%);

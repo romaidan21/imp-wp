@@ -3,7 +3,7 @@
   "themeName": "bamboo",
   "url": {
     "local": "http://imp.loc",
-    "staging": "https://imp.bambus.com.ua",
+    "staging": "http://www.dev-ronam.website",
     "production": "https://imp.com"
   },
   "jsEntries": ["index"]

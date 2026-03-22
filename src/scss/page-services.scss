@@ -1,3 +1,5 @@
+@use "utils" as *;
+
 .services {
   // background: rgba(242, 246, 250, 0.56);
 
@@ -8,5 +10,11 @@
   .card-service {
     text-align: left;
     align-items: flex-start;
+  }
+
+  @include mq-max-768 {
+    .grid {
+      --cols: 1;
+    }
   }
 }

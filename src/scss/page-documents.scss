@@ -7,15 +7,16 @@
   .notice {
     display: flex;
     align-items: flex-start;
-    gap: min-max(12, 16);
+    gap: min-max(8, 12);
     border-left: min-max(2, 4) solid var(--color-accent);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     background: rgba(216, 169, 61, 0.12);
     padding: min-max(16, 32) min-max(16, 24);
+    font-size: min-max(12, 14);
 
     .icon {
       color: var(--color-accent);
-      width: min-max(20, 28);
+      width: min-max(20, 24);
       aspect-ratio: 1;
       flex: none;
       display: flex;
@@ -72,7 +73,7 @@
     }
 
     .title {
-      font-size: min-max(16, 20);
+      font-size: min-max(18, 22);
     }
 
     .category {
@@ -106,6 +107,18 @@
 
       .download {
         background: var(--color-accent);
+      }
+    }
+
+    @include mq-max-768 {
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+
+      .content {
+        width: 100%;
+        order: -1;
+        flex: none;
       }
     }
   }

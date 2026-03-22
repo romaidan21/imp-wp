@@ -35,10 +35,10 @@
             <?php } ?>
 
           </div>
-          <div class="search">
+          <!-- <div class="search">
             <span class="search-icon" aria-hidden="true"></span>
             <input placeholder="Пошук статей..." class="search-input" />
-          </div>
+          </div> -->
         </div>
 
         <div class="grid mt-lg">
