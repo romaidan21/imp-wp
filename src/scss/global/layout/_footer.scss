@@ -165,7 +165,7 @@
     aspect-ratio: 1;
     width: min-max(32, 40);
     background: rgba(255, 255, 255, 0.12);
-    border-radius: 50%;
+    border-radius: min-max(8, 12);
 
     .mask {
       position: absolute;

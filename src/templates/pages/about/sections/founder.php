@@ -1,17 +1,25 @@
+<?php
+$photo = $args['photo'] ?? '';
+$name = $args['g']['name'] ?? '';
+$position = $args['g']['position'] ?? '';
+$content = $args['g']['content'] ?? '';
+?>
 <section class="founder">
   <div class="container">
     <div class="founder__layout">
       <div class="founder__thumb fit-cover">
-        <?php renderTempImage('partner.png') ?>
+        <?php echo wp_get_attachment_image($photo, 'full', false, [
+          'loading' => 'lazy',
+          'sizes' => '(max-width: 768px) 300px, 400px',
+          'alt' => $name
+        ]) ?>
       </div>
       <div>
-        <h2 class="founder__name font-48">Ігор Мельник</h2>
-        <p class="founder__role font-22">Керуючий Партнер / Засновник</p>
+        <h2 class="founder__name font-48"><?php echo esc_html($name); ?></h2>
+        <p class="founder__role font-22"><?php echo esc_html($position); ?></p>
 
         <div class="the_content content">
-          <p>Адвокат з понад 15-річним досвідом у сфері корпоративного права, вирішення складних комерційних спорів та захисту бізнесу. Засновник адвокатського бюро "Ігор Мельник та Партнери".</p>
-          <p>Закінчив юридичний факультет ЛНУ ім. Івана Франка. Працював на керівних посадах у провідних юридичних компаніях України, перш ніж заснувати власне бюро, яке сьогодні об'єднує команду висококваліфікованих експертів.</p>
-          <p>"Наша головна мета - не просто надавати юридичні послуги, а бути стратегічним партнером для вашого бізнесу, забезпечуючи його стабільний розвиток та безпеку."</p>
+          <?php echo wp_kses_post($content); ?>
         </div>
       </div>
     </div>

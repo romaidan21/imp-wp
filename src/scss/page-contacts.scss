@@ -28,10 +28,10 @@
     .icon {
       display: flex;
       flex: none;
-      width: min-max(40, 48);
+      width: min-max(32, 48);
       aspect-ratio: 1;
       background: var(--color-border);
-      border-radius: 50%;
+      border-radius: min-max(8, 8);
       background-size: min-max(20, 24);
       background-position: center;
       background-repeat: no-repeat;
@@ -77,6 +77,17 @@
     display: flex;
     min-height: 300px;
   }
+
+  .social-icons {
+    .icon {
+      width: min-max(36, 56);
+      border: 1px solid var(--color-border);
+
+      .mask {
+        mask-size: min-max(20, 24);
+      }
+    }
+  }
 }
 
 .form-card {
@@ -116,6 +127,7 @@
     font-size: min-max(16, 16);
     border-radius: var(--radius-sm);
     transition: var(--transition);
+    transition-property: color, border-color, outline-color;
     font-family: var(--font-roboto);
     font-weight: 400;
     outline-color: var(--color-main-light);

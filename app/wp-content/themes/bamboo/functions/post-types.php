@@ -6,6 +6,7 @@ add_action('admin_init', 'remove_fse_on_page_type');
 
 function createBamooCustomPosts()
 {
+
   register_post_type('blog', [
     'labels'        => [
       'name'           => __('Блог', 'bamboo'),
@@ -50,6 +51,26 @@ function createBamooCustomPosts()
     'menu_position' => 5,
     'menu_icon'     =>  'dashicons-money',
     'supports'      => ['title', 'excerpt', 'thumbnail',  'custom-fields']
+  ]);
+  register_post_type('documents', [
+    'labels'        => [
+      'name'           => __('Документи', 'bamboo'),
+      'name_admin_bar' => __('Документи', 'bamboo'),
+      'singular_name'  => __('Документ', 'bamboo'),
+      'add_new'        => __('Додати документ', 'bamboo'),
+      'add_new_item'   => __('Додати документ', 'bamboo')
+    ],
+    'public'              => false,
+    'show_ui'             => true,
+    'show_in_menu'        => true,
+    'exclude_from_search' => true,
+    'publicly_queryable'  => false,
+    'has_archive'         => false,
+    'rewrite'             => false,
+    'show_in_rest'        => false,
+    'menu_position'       => 6,
+    'menu_icon'           => 'dashicons-media-document',
+    'supports'            => ['title', 'custom-fields']
   ]);
   // Highlight menu item for custom post type archives
   add_filter('nav_menu_css_class', function ($classes, $item) {

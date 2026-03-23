@@ -1,9 +1,9 @@
 {
-    "key": "group_695520e55fec9",
-    "title": "Page | Home",
+    "key": "group_69c120a675a17",
+    "title": "Page | About",
     "fields": [
         {
-            "key": "field_695520e5dcba2",
+            "key": "field_69c120a677c79",
             "label": "",
             "name": "page_content",
             "aria-label": "",
@@ -19,8 +19,8 @@
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_6955228f1e73a",
-                    "label": "Головна",
+                    "key": "field_69c121e2f16ef",
+                    "label": "Засновник",
                     "name": "",
                     "aria-label": "",
                     "type": "tab",
@@ -37,9 +37,9 @@
                     "selected": 0
                 },
                 {
-                    "key": "field_695522a01e73b",
+                    "key": "field_69c121f6f16f0",
                     "label": "",
-                    "name": "intro-section",
+                    "name": "founder-section",
                     "aria-label": "",
                     "type": "group",
                     "instructions": "",
@@ -53,86 +53,117 @@
                     "layout": "block",
                     "sub_fields": [
                         {
-                            "key": "field_695525281e73d",
-                            "label": "Назва",
-                            "name": "title",
+                            "key": "field_69c12216f16f3",
+                            "label": "Фото",
+                            "name": "photo",
                             "aria-label": "",
-                            "type": "textarea",
+                            "type": "image",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "100",
+                                "width": "20",
                                 "class": "",
                                 "id": ""
                             },
-                            "default_value": "",
-                            "maxlength": "",
-                            "allow_in_bindings": 1,
-                            "rows": 2,
-                            "placeholder": "",
-                            "new_lines": "br"
-                        },
-                        {
-                            "key": "field_695522ae1e73c",
-                            "label": "Опис",
-                            "name": "supertitle",
-                            "aria-label": "",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "100",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "maxlength": "",
+                            "return_format": "id",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": "",
                             "allow_in_bindings": 0,
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": ""
+                            "preview_size": "medium"
                         },
                         {
-                            "key": "field_695525bfd2c0d",
-                            "label": "Кнопка консультації",
-                            "name": "button",
+                            "key": "field_69c12242f16f4",
+                            "label": "",
+                            "name": "g",
                             "aria-label": "",
-                            "type": "link",
+                            "type": "group",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "50",
+                                "width": "80",
                                 "class": "",
                                 "id": ""
                             },
-                            "return_format": "array",
-                            "allow_in_bindings": 0
-                        },
-                        {
-                            "key": "field_69bd4684f70b7",
-                            "label": "Додаткова кнопка",
-                            "name": "button_2",
-                            "aria-label": "",
-                            "type": "link",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "50",
-                                "class": "",
-                                "id": ""
-                            },
-                            "return_format": "array",
-                            "allow_in_bindings": 0
+                            "layout": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_69c12252f16f5",
+                                    "label": "ПІБ",
+                                    "name": "name",
+                                    "aria-label": "",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "maxlength": "",
+                                    "allow_in_bindings": 0,
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": ""
+                                },
+                                {
+                                    "key": "field_69c12264f16f6",
+                                    "label": "Посада",
+                                    "name": "position",
+                                    "aria-label": "",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "maxlength": "",
+                                    "allow_in_bindings": 0,
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": ""
+                                },
+                                {
+                                    "key": "field_69c12274f16f7",
+                                    "label": "Опис",
+                                    "name": "content",
+                                    "aria-label": "",
+                                    "type": "wysiwyg",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "allow_in_bindings": 0,
+                                    "tabs": "visual",
+                                    "toolbar": "basic",
+                                    "media_upload": 0,
+                                    "delay": 1
+                                }
+                            ]
                         }
                     ]
                 },
                 {
-                    "key": "field_695530001a000",
-                    "label": "Практики",
+                    "key": "field_69c123630c522",
+                    "label": "Місія\/Цінності",
                     "name": "",
                     "aria-label": "",
                     "type": "tab",
@@ -149,9 +180,9 @@
                     "selected": 0
                 },
                 {
-                    "key": "field_695530001a001",
+                    "key": "field_69c1237e0c523",
                     "label": "",
-                    "name": "practices-section",
+                    "name": "mission-section",
                     "aria-label": "",
                     "type": "group",
                     "instructions": "",
@@ -165,7 +196,7 @@
                     "layout": "block",
                     "sub_fields": [
                         {
-                            "key": "field_695530001a002",
+                            "key": "field_69c1237e0c524",
                             "label": "Назва",
                             "name": "title",
                             "aria-label": "",
@@ -186,112 +217,8 @@
                             "append": ""
                         },
                         {
-                            "key": "field_695530001a003",
-                            "label": "Перелік",
-                            "name": "items",
-                            "aria-label": "",
-                            "type": "relationship",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "post_type": [
-                                "services"
-                            ],
-                            "post_status": [
-                                "publish"
-                            ],
-                            "taxonomy": "",
-                            "filters": "",
-                            "return_format": "object",
-                            "min": "",
-                            "max": "",
-                            "allow_in_bindings": 1,
-                            "elements": "",
-                            "bidirectional": 0,
-                            "bidirectional_target": []
-                        },
-                        {
-                            "key": "field_695530001a008",
-                            "label": "Кнопка",
-                            "name": "button",
-                            "aria-label": "",
-                            "type": "link",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "return_format": "array",
-                            "allow_in_bindings": 0
-                        }
-                    ]
-                },
-                {
-                    "key": "field_695530001b000",
-                    "label": "Переваги",
-                    "name": "",
-                    "aria-label": "",
-                    "type": "tab",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "placement": "top",
-                    "endpoint": 0,
-                    "selected": 0
-                },
-                {
-                    "key": "field_695530001b001",
-                    "label": "",
-                    "name": "advantages-section",
-                    "aria-label": "",
-                    "type": "group",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "layout": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_695530001b002",
-                            "label": "Назва",
-                            "name": "title",
-                            "aria-label": "",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "maxlength": "",
-                            "allow_in_bindings": 0,
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": ""
-                        },
-                        {
-                            "key": "field_695530001b003",
-                            "label": "Перелік",
+                            "key": "field_69c123990c526",
+                            "label": "",
                             "name": "items",
                             "aria-label": "",
                             "type": "repeater",
@@ -304,23 +231,149 @@
                                 "id": ""
                             },
                             "layout": "block",
-                            "button_label": "Додати елемент",
+                            "pagination": 0,
                             "min": 0,
                             "max": 0,
-                            "rows_per_page": 20,
                             "collapsed": "",
+                            "button_label": "Додати рядок",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
-                                    "key": "field_695530001b004",
-                                    "label": "Іконка",
-                                    "name": "icon",
+                                    "key": "field_69c123ac0c527",
+                                    "label": "Назва",
+                                    "name": "title",
+                                    "aria-label": "",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "maxlength": "",
+                                    "allow_in_bindings": 0,
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "parent_repeater": "field_69c123990c526"
+                                },
+                                {
+                                    "key": "field_69c123c60c528",
+                                    "label": "Контент",
+                                    "name": "content",
+                                    "aria-label": "",
+                                    "type": "wysiwyg",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "allow_in_bindings": 0,
+                                    "tabs": "visual",
+                                    "toolbar": "basic",
+                                    "media_upload": 0,
+                                    "delay": 1,
+                                    "parent_repeater": "field_69c123990c526"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "key": "field_69c124cde1287",
+                    "label": "Принципи",
+                    "name": "",
+                    "aria-label": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "top",
+                    "endpoint": 0,
+                    "selected": 0
+                },
+                {
+                    "key": "field_69c124dde1288",
+                    "label": "",
+                    "name": "principles-section",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_69c124dde1289",
+                            "label": "Назва",
+                            "name": "title",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_69c124dde128a",
+                            "label": "",
+                            "name": "items",
+                            "aria-label": "",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "layout": "table",
+                            "pagination": 0,
+                            "min": 0,
+                            "max": 0,
+                            "collapsed": "",
+                            "button_label": "Додати рядок",
+                            "rows_per_page": 20,
+                            "sub_fields": [
+                                {
+                                    "key": "field_69c12502e128d",
+                                    "label": "Зображення",
+                                    "name": "image",
                                     "aria-label": "",
                                     "type": "image",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "20",
+                                        "width": "21",
                                         "class": "",
                                         "id": ""
                                     },
@@ -335,10 +388,10 @@
                                     "mime_types": "",
                                     "allow_in_bindings": 0,
                                     "preview_size": "thumbnail",
-                                    "parent_repeater": "field_695530001b003"
+                                    "parent_repeater": "field_69c124dde128a"
                                 },
                                 {
-                                    "key": "field_69bd477a37d4a",
+                                    "key": "field_69c1251ee128e",
                                     "label": "",
                                     "name": "g",
                                     "aria-label": "",
@@ -352,10 +405,9 @@
                                         "id": ""
                                     },
                                     "layout": "block",
-                                    "parent_repeater": "field_695530001b003",
                                     "sub_fields": [
                                         {
-                                            "key": "field_695530001b005",
+                                            "key": "field_69c12525e128f",
                                             "label": "Назва",
                                             "name": "title",
                                             "aria-label": "",
@@ -364,7 +416,7 @@
                                             "required": 0,
                                             "conditional_logic": 0,
                                             "wrapper": {
-                                                "width": "100",
+                                                "width": "",
                                                 "class": "",
                                                 "id": ""
                                             },
@@ -376,103 +428,30 @@
                                             "append": ""
                                         },
                                         {
-                                            "key": "field_695530001b006",
-                                            "label": "Опис",
-                                            "name": "text",
+                                            "key": "field_69c12541e1290",
+                                            "label": "Контент",
+                                            "name": "content",
                                             "aria-label": "",
                                             "type": "textarea",
                                             "instructions": "",
                                             "required": 0,
                                             "conditional_logic": 0,
                                             "wrapper": {
-                                                "width": "100",
+                                                "width": "",
                                                 "class": "",
                                                 "id": ""
                                             },
                                             "default_value": "",
                                             "maxlength": "",
                                             "allow_in_bindings": 0,
-                                            "rows": 2,
+                                            "rows": 3,
                                             "placeholder": "",
                                             "new_lines": "br"
                                         }
-                                    ]
+                                    ],
+                                    "parent_repeater": "field_69c124dde128a"
                                 }
                             ]
-                        }
-                    ]
-                },
-                {
-                    "key": "field_695530001c000",
-                    "label": "Останні новини",
-                    "name": "",
-                    "aria-label": "",
-                    "type": "tab",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "placement": "top",
-                    "endpoint": 0,
-                    "selected": 0
-                },
-                {
-                    "key": "field_695530001c001",
-                    "label": "",
-                    "name": "latest-news-section",
-                    "aria-label": "",
-                    "type": "group",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "layout": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_695530001c002",
-                            "label": "Назва",
-                            "name": "title",
-                            "aria-label": "",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "maxlength": "",
-                            "allow_in_bindings": 0,
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": ""
-                        },
-                        {
-                            "key": "field_695530001c003",
-                            "label": "Кнопка",
-                            "name": "button",
-                            "aria-label": "",
-                            "type": "link",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "return_format": "array",
-                            "allow_in_bindings": 0
                         }
                     ]
                 }
@@ -484,7 +463,7 @@
             {
                 "param": "page_template",
                 "operator": "==",
-                "value": "front-page.php"
+                "value": "page-about.php"
             }
         ]
     ],
@@ -500,5 +479,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1774262708
+    "modified": 1774270560
 }

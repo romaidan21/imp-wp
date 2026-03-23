@@ -5,5 +5,10 @@ $tpl_assets = [
   'css' => 'page-services',
 ];
 
-// renderPage('services', get_page_fields('services'));
-renderPage('services');
+renderPage(
+  'services',
+  [
+    'title' => get_the_title(12),
+    'subtitle' => get_field('page-description', 12) ?? '',
+  ]
+);

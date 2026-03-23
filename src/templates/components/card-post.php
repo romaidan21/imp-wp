@@ -37,18 +37,24 @@ if ($categories && !is_wp_error($categories)) {
     ); ?>
   </div>
   <div class="content">
-    <div class="meta">
-      <?php if ($categories && !is_wp_error($categories)) {  ?>
-        <?php
-        foreach ($categories as $cat) {
-          echo '<span class="tag">' . esc_html($cat->name) . '</span>';
-        }
-        ?>
-      <?php } ?>
-      <span class="date"><?php echo $date; ?></span>
+    <div>
+
+      <div class="meta">
+        <?php if ($categories && !is_wp_error($categories)) {  ?>
+          <?php
+          foreach ($categories as $cat) {
+            echo '<span class="tag">' . esc_html($cat->name) . '</span>';
+          }
+          ?>
+        <?php } ?>
+        <span class="date"><?php echo $date; ?></span>
+      </div>
+      <h3 class="title font-22"><?php echo $title; ?></h3>
+      <?php if ($excerpt) : ?>
+        <p class="excerpt"><?php echo $excerpt; ?></p>
+      <?php endif; ?>
     </div>
-    <h3 class="title font-22"><?php echo $title; ?></h3>
-    <p class="excerpt"><?php echo $excerpt; ?></p>
+
     <span class="cta empty"><?php echo $ctaText; ?></span>
   </div>
 </a>

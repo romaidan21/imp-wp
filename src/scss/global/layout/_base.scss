@@ -92,6 +92,10 @@ section {
 
   .content {
     padding: min-max(16, 32);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .meta {

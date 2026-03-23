@@ -1,21 +1,34 @@
+<?php
+$title = $args['title'] ?? '';
+$items = $args['items'] ?? [];
+$button = $args['button'] ?? null;
+
+if (empty($items)) return;
+
+?>
+
+
 <section class="practices">
   <div class="container">
     <div class="section-heading centered">
-      <h2 class="title font-48">Ключові практики</h2>
+      <?php if ($title): ?>
+        <h2 class="title font-48"><?php echo $title ?></h2>
+      <?php endif; ?>
       <div class="divider"></div>
     </div>
 
-    <?php
-    $practices = BambooPosts::getServicePosts();
-    ?>
     <div class="grid mt-lg">
-      <?php foreach ($practices as $practice): ?>
-        <?php renderComponent('card-service', $practice); ?>
-      <?php endforeach; ?>
+      <?php if (!empty($items)): ?>
+        <?php foreach ($items as $practice): ?>
+          <?php renderComponent('card-service', $practice); ?>
+        <?php endforeach; ?>
+      <?php endif; ?>
     </div>
 
     <div class="actions flex-c mt-lg">
-      <a href="/services" class="cta stroke">Всі послуги</a>
+      <?php if ($button && isset($button['url'], $button['title'])): ?>
+        <a href="<?php echo $button['url']; ?>" class="cta stroke"><?php echo $button['title']; ?></a>
+      <?php endif; ?>
     </div>
   </div>
 </section>

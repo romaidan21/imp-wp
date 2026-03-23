@@ -30,4 +30,14 @@ class BambooPosts
       ]
     );
   }
+  public static function getDocuments($args = [])
+  {
+    return get_posts(
+      [
+        'post_type' => 'documents',
+        ...self::$default,
+        ...$args,
+      ]
+    );
+  }
 }

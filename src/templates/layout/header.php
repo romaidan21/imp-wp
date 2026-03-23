@@ -11,15 +11,11 @@ $menu = wp_nav_menu([
 
 ?>
 
-<header class="header">
+<header class="header" data-theme="dark">
   <div class="container">
     <?php renderLogo(false) ?>
 
     <?php echo $menu; ?>
-
-
-
-    <!-- <a href="/contacts" class="cta gold">Замовити консультацію</a> -->
 
     <button class="mobile-toggle" type="button" aria-label="Відкрити меню">
       <span></span>

@@ -1,52 +1,36 @@
+<?php
+$items = $args['items'] ?? [];
+if (empty($items)) return;
+?>
 <section class="principles">
   <div class="container">
     <div class="section-heading centered">
-      <h2 class="title font-48">Наші принципи роботи</h2>
+      <h2 class="title font-48"><?php echo esc_html($args['title'] ?? ''); ?></h2>
       <div class="divider"></div>
     </div>
 
     <div class="list flex-v mt-lg">
-      <article class="item">
-        <div class="item__text">
-          <div>
-            <h3 class="font-28">Глибоке занурення в задачу</h3>
-            <div class="the_content content">
-              <p>На старті проєкту ми детально аналізуємо бізнес-модель, ризики та контекст спору, щоб запропонувати стратегію, яка працює в реальних умовах.</p>
+      <?php foreach ($items as $item): ?>
+        <article class="item">
+          <div class="item__text">
+            <div>
+              <h3 class="font-28"><?php echo esc_html($item['g']['title'] ?? ''); ?></h3>
+              <?php if (!empty($item['g']['content'])): ?>
+                <div class="the_content content">
+                  <?php echo wp_kses_post($item['g']['content']); ?>
+                </div>
+              <?php endif; ?>
             </div>
           </div>
-        </div>
-        <div class="thumb fit-cover">
-          <?php renderTempImage('temp.png'); ?>
-        </div>
-      </article>
-
-      <article class="item">
-        <div class="item__text">
-          <div>
-            <h3 class="font-28">Прозора комунікація</h3>
-            <div class="the_content content">
-              <p>Кожен етап супроводу супроводжується зрозумілими поясненнями, прогнозами щодо строків і регулярними оновленнями, щоб ви завжди контролювали процес.</p>
-            </div>
+          <div class="thumb fit-cover">
+            <?php echo wp_get_attachment_image($item['image'] ?? '', 'full', false, [
+              'loading' => 'lazy',
+              'sizes' => '(max-width: 768px) 300px, 400px',
+              'alt' => $item['g']['title'] ?? ''
+            ]) ?>
           </div>
-        </div>
-        <div class="thumb fit-cover">
-          <?php renderTempImage('temp.png'); ?>
-        </div>
-      </article>
-
-      <article class="item">
-        <div class="item__text">
-          <div>
-            <h3 class="font-28">Фокус на бізнес-результат</h3>
-            <div class="the_content content">
-              <p>Ми оцінюємо рішення через призму впливу на ваш бізнес: фінансовий ефект, репутаційні наслідки та довгострокову стабільність компанії.</p>
-            </div>
-          </div>
-        </div>
-        <div class="thumb fit-cover">
-          <?php renderTempImage('temp.png'); ?>
-        </div>
-      </article>
+        </article>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>

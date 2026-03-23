@@ -50,6 +50,34 @@
     max-width: min-max(1000, 1200);
   }
 
+  .container-cta {
+    padding-top: 0;
+    .section-heading {
+      border-radius: min-max(12, 24);
+      background: var(--color-main-gradient);
+      padding: min-max(32, 60) min-max(16, 32);
+      gap: min-max(12, 24);
+
+      .title {
+        font-size: min-max(20, 40);
+      }
+
+      .subtitle {
+        font-size: min-max(14, 18);
+
+        @include mq-max-768 {
+          br {
+            display: none;
+          }
+        }
+      }
+
+      .cta {
+        margin-top: min-max(8, 16);
+      }
+    }
+  }
+
   .content {
     font-family: "Roboto", sans-serif;
     font-optical-sizing: auto;

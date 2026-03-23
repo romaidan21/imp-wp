@@ -1,6 +1,6 @@
 <?php
 
-renderSection('intro');
-renderSection('practices');
-renderSection('advantages');
-renderSection('latest-news');
+renderSection('intro', $args['intro-section']);
+renderSection('practices', $args['practices-section']);
+renderSection('advantages', $args['advantages-section']);
+renderSection('latest-news', $args['latest-news-section']);

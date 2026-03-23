@@ -1,7 +1,5 @@
 <?php
 $href = get_permalink($args->ID);
-$icon = 'S';
-// $icon = $args->icon ?? 'default-icon.svg';
 $title = $args->post_title;
 $excerpt = $args->post_excerpt;
 $ctaText = $args->cta_text ?? 'Читати далі';

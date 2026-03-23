@@ -6,4 +6,10 @@ $tpl_assets = [
 ];
 
 // renderPage('services', get_page_fields('services'));
-renderPage('blog');
+renderPage(
+  'blog',
+  [
+    'title' => get_the_title(13),
+    'subtitle' => get_field('page-description', 13) ?? '',
+  ]
+);

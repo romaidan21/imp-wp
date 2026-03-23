@@ -1,3 +1,9 @@
+<?php
+
+$args = get_field('footer', 'options');
+
+?>
+
 <section class="contacts">
 
   <div class="container">
@@ -11,29 +17,36 @@
           <div class="row">
             <div class="icon location"></div>
             <div class="data">
-              <p>
-                вул. Прикладна, 1, офіс 42
-                <br />
-                м. Львів, 79000, Україна
-              </p>
+              <p><?php echo $args['address'] ?? ''; ?></p>
             </div>
 
           </div>
 
-          <div class="row">
-            <div class="icon phone"></div>
-            <div class="data">
-              <a href="tel:+380000000000">+380 (00) 000-00-00</a>
-              <a href="tel:+380000000001">+380 (00) 000-00-01</a>
-            </div>
-          </div>
 
-          <div class="row">
-            <div class="icon email"></div>
-            <div class="data">
-              <a href="mailto:info@implaw.com">info@implaw.com</a>
+          <?php if (!empty($args['phones'])) : ?>
+            <div class="row">
+              <div class="icon phone"></div>
+              <div class="data">
+                <?php foreach ($args['phones'] as $phone) : ?>
+                  <a href="tel:<?php echo esc_attr($phone['phone_number']); ?>"><?php echo esc_html($phone['phone_number']); ?></a>
+                <?php endforeach; ?>
+              </div>
             </div>
-          </div>
+          <?php endif; ?>
+
+          <?php if (!empty($args['emails'])) : ?>
+            <div class="row">
+              <div class="icon email"></div>
+              <div class="data">
+                <?php foreach ($args['emails'] as $email) : ?>
+                  <a href="mailto:<?php echo esc_attr($email['email_address']); ?>"><?php echo esc_html($email['email_address']); ?></a>
+                <?php endforeach; ?>
+              </div>
+            </div>
+          <?php endif; ?>
+
+          <?php renderComponent('socials', $args); ?>
+
         </div>
       </div>
 
