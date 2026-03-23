@@ -2,7 +2,7 @@
 $menu = wp_nav_menu([
   'theme_location' => "footer_menu",
   'container'      => null,
-  'items_wrap'     => '<nav class="pages" data-item>%3$s</nav>',
+  'items_wrap'     => '<ul class="pages" data-item>%3$s</ul>',
   'echo'           => false,
   'fallback_cb'    => null,
   'depth'          => 2

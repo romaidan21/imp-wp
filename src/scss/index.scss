@@ -1,3 +1,15 @@
 @charset "utf-8";
 @use "global";
 @use "./sections/hero";
+
+html:not(.loaded) {
+  body.home {
+    main {
+      height: calc(100vh + 1px);
+      overflow: hidden;
+    }
+    footer {
+      display: none;
+    }
+  }
+}

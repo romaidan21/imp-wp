@@ -20,6 +20,7 @@
     grid-column: span 2;
     display: flex;
     gap: min-max(24, 72);
+    list-style-type: none;
 
     * {
       list-style: none;
@@ -182,7 +183,7 @@
   }
 }
 
-nav.pages {
+ul.pages {
   li:not(.order) {
     a {
       &[aria-current] {
