@@ -41,7 +41,10 @@
     top: 50%;
     transform: translate(50%, -50%);
     width: min-max(200, 400);
-    opacity: 0.1;
+
+    img {
+      opacity: 0.1;
+    }
   }
 }
 

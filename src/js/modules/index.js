@@ -1,3 +1,3 @@
-// import animationsController from "./animations/animations-controller";
+import animationsController from "./animations/animations-controller";
 
-// animationsController();
+animationsController();

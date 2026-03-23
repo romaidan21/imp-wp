@@ -1,6 +1,8 @@
 @use "utils" as *;
 
 .header {
+  --bg: transparent;
+  background: var(--bg);
   position: fixed;
   top: 0;
   left: 0;
@@ -9,6 +11,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition:
+    background-color var(--transition),
+    transform 1s ease;
+  transform: translateY(-100%);
+
+  .loaded & {
+    transform: translateY(0);
+  }
+
+  &.blurred {
+    --bg: var(--color-white);
+
+    &[data-theme] {
+      --bg: var(--color-main);
+    }
+  }
 
   .container {
     align-items: center;
@@ -76,7 +94,8 @@
         display: block;
         width: 20px;
         height: 2px;
-        background: var(--color-white);
+        background: var(--site-color);
+        transition: background-color var(--transition);
       }
     }
   }

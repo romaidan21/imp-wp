@@ -24,8 +24,8 @@
 
 
     <section class="posts">
-      <div class="container">
-        <div class="filters">
+      <div class="container" data-stagger='fadeup'>
+        <div class="filters" data-item>
           <div class="tags">
             <a class="tag<?php echo ($current_term == 0) ? ' active' : ''; ?>" href="<?php echo esc_url(get_post_type_archive_link('post')); ?>">Всі</a>
             <?php foreach ($categories as $category) { ?>
@@ -41,7 +41,7 @@
           </div> -->
         </div>
 
-        <div class="grid mt-lg">
+        <div class="grid mt-lg" data-item>
           <?php foreach ($articles as $article) {
             renderComponent('card-post', $article);
           } ?>

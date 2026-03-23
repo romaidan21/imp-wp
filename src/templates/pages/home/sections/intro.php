@@ -9,20 +9,23 @@ $button_2 = $args['button_2'] ?? null;
 <section class="intro" data-theme="dark">
   <div class="media fit-cover">
     <?php if (has_post_thumbnail()): ?>
-      <?php the_post_thumbnail('full'); ?>
+      <?php the_post_thumbnail('full', ['data-fade' => 'in']); ?>
     <?php endif; ?>
     <div class="overlay"></div>
   </div>
 
-  <div class="container ">
+  <div class="container " data-stagger='fadeup'>
     <div class="main-logo"></div>
     <?php if ($title): ?>
-      <h1 class="font-72"><?php echo $title ?></h1>
+      <h1 class="font-72" data-item><?php echo $title ?></h1>
     <?php endif; ?>
     <?php if ($supertitle): ?>
-      <p class="subtitle font-24"><?php echo $supertitle; ?></p>
+      <div data-item>
+        <p class="subtitle font-24"><?php echo $supertitle; ?></p>
+
+      </div>
     <?php endif; ?>
-    <div class="actions">
+    <div class="actions" data-item>
       <?php if ($button && isset($button['url'], $button['title'])): ?>
         <a href="<?php echo $button['url'] ?>" class="cta gold"><?php echo $button['title'] ?></a>
       <?php endif; ?>

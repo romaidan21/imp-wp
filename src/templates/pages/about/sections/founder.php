@@ -7,18 +7,18 @@ $content = $args['g']['content'] ?? '';
 <section class="founder">
   <div class="container">
     <div class="founder__layout">
-      <div class="founder__thumb fit-cover">
+      <div class="founder__thumb fit-cover" data-fade='up'>
         <?php echo wp_get_attachment_image($photo, 'full', false, [
           'loading' => 'lazy',
           'sizes' => '(max-width: 768px) 300px, 400px',
           'alt' => $name
         ]) ?>
       </div>
-      <div>
-        <h2 class="founder__name font-48"><?php echo esc_html($name); ?></h2>
-        <p class="founder__role font-22"><?php echo esc_html($position); ?></p>
+      <div data-stagger='fadeup'>
+        <h2 class="founder__name font-48" data-item><?php echo esc_html($name); ?></h2>
+        <p class="founder__role font-22" data-item><?php echo esc_html($position); ?></p>
 
-        <div class="the_content content">
+        <div class="the_content content" data-item>
           <?php echo wp_kses_post($content); ?>
         </div>
       </div>

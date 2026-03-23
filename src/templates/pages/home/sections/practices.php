@@ -10,14 +10,14 @@ if (empty($items)) return;
 
 <section class="practices">
   <div class="container">
-    <div class="section-heading centered">
-      <?php if ($title): ?>
+    <?php if ($title): ?>
+      <div class="section-heading centered" data-fade='up'>
         <h2 class="title font-48"><?php echo $title ?></h2>
-      <?php endif; ?>
-      <div class="divider"></div>
-    </div>
+        <div class="divider"></div>
+      </div>
+    <?php endif; ?>
 
-    <div class="grid mt-lg">
+    <div class="grid mt-lg" data-stagger='fadeup'>
       <?php if (!empty($items)): ?>
         <?php foreach ($items as $practice): ?>
           <?php renderComponent('card-service', $practice); ?>
@@ -25,7 +25,7 @@ if (empty($items)) return;
       <?php endif; ?>
     </div>
 
-    <div class="actions flex-c mt-lg">
+    <div class="actions flex-c mt-lg" data-fade='up'>
       <?php if ($button && isset($button['url'], $button['title'])): ?>
         <a href="<?php echo $button['url']; ?>" class="cta stroke"><?php echo $button['title']; ?></a>
       <?php endif; ?>

@@ -58,7 +58,9 @@
     "app:from-staging": "node bbg.mjs sync --from staging --to local",
     "uploads:from-staging": "node bbg.mjs sync --from staging --to local --src wp-content/uploads"
   },
-  "dependencies": {},
+  "dependencies": {
+    "gsap": "^3.14.2"
+  },
   "devDependencies": {
     "@rspack/cli": "^1.6.7",
     "@rspack/core": "^1.6.7",

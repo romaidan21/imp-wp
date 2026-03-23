@@ -8,22 +8,22 @@ if (empty($articles)) return;
 <section class="news">
   <div class="container">
 
-    <div class="section-heading">
-      <?php if ($title): ?>
+    <?php if ($title): ?>
+      <div class="section-heading" data-fade='up'>
         <h2 class="title font-48"><?php echo $title; ?></h2>
-      <?php endif; ?>
-      <div class="divider"></div>
-    </div>
+        <div class="divider"></div>
+      </div>
+    <?php endif; ?>
 
     <?php
     ?>
-    <div class="grid mt-lg">
+    <div class="grid mt-lg" data-fade='up'>
       <?php foreach ($articles as $article) {
         renderComponent('card-post', $article);
       } ?>
     </div>
 
-    <div class="actions flex-c mt-lg">
+    <div class="actions flex-c mt-lg" data-fade='up'>
       <?php if ($button && isset($button['url'], $button['title'])): ?>
         <a href="<?php echo $button['url']; ?>" class="cta stroke"><?php echo $button['title']; ?></a>
       <?php endif; ?>

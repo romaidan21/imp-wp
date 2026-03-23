@@ -4,13 +4,13 @@ if (empty($items)) return;
 ?>
 <section class="mission">
   <div class="container">
-    <div class="section-heading centered">
+    <div class="section-heading centered" data-fade='up'>
       <h2 class="title font-48"><?php echo esc_html($args['title'] ?? ''); ?></h2>
       <div class="divider"></div>
     </div>
-    <div class="grid mt-lg">
+    <div class="grid mt-lg" data-stagger='fadeup'>
       <?php foreach ($items as $item): ?>
-        <article class="panel">
+        <article class="panel" data-item>
           <h3 class="title font-28">
             <span class="title-line"></span>
             <?php echo esc_html($item['title'] ?? ''); ?>

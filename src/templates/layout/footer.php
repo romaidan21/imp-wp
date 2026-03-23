@@ -2,7 +2,7 @@
 $menu = wp_nav_menu([
   'theme_location' => "footer_menu",
   'container'      => null,
-  'items_wrap'     => '<nav class="pages">%3$s</nav>',
+  'items_wrap'     => '<nav class="pages" data-item>%3$s</nav>',
   'echo'           => false,
   'fallback_cb'    => null,
   'depth'          => 2
@@ -16,9 +16,9 @@ $args = get_field('footer', 'options');
 
 
 <footer class="footer">
-  <div class="container">
+  <div class="container" data-stagger='fadeup'>
     <div class="grid">
-      <div class="brand flex-v">
+      <div class="brand flex-v" data-item>
         <div class="logo fit-cover">
           <?php echo wp_get_attachment_image($args['logo'] ?? '', 'full', false, ['loading' => 'lazy',]) ?>
         </div>
@@ -29,7 +29,7 @@ $args = get_field('footer', 'options');
       <?php echo $menu; ?>
 
 
-      <div class="column">
+      <div class="column" data-item>
         <h4 class="column-title">Контакти</h4>
         <div class="list flex-v">
           <div class="row">
@@ -68,7 +68,7 @@ $args = get_field('footer', 'options');
     </div>
 
     <div class="сopyright mt-lg">
-      <p>© <?php echo date("Y"); ?> <?php bloginfo('name'); ?></p>
+      <p data-fade='up'>© <?php echo date("Y"); ?> <?php bloginfo('name'); ?></p>
     </div>
   </div>
 </footer>
