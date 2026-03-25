@@ -7,8 +7,8 @@
   <meta name="format-detection" content="telephone=no">
   <?php wp_head(); ?>
   <!-- startFontsPreload -->
-  <link rel="preload" as="font" type="font/woff2" href="<?php assets('fonts/Montserrat-Variable.woff2'); ?>" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="<?php assets('fonts/Roboto-400.woff2'); ?>" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="<?php assets('fonts/Montserrat-Variable.woff2');?>" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="<?php assets('fonts/Roboto-400.woff2');?>" crossorigin>
   <!-- endFontsPreload -->
 
   <style>

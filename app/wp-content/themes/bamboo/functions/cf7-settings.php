@@ -3,7 +3,16 @@
 /**
  * Disable the auto-added <p> & <br> tags around inputs in Contact Form 7.
  */
-add_filter('wpcf7_autop_or_not', '__return_false');
+// add_filter('wpcf7_autop_or_not', '__return_false');
+add_filter('wpcf7_autop_or_not', 'custom_wpcf7_autop_or_not');
+
+function custom_wpcf7_autop_or_not($autop)
+{
+  if (is_page()) {
+    return false;
+  }
+  return $autop;
+}
 
 // Disable CF7 default styles & scripts
 add_filter('wpcf7_load_css', '__return_false');
