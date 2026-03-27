@@ -1,42 +1,78 @@
-.not-found-page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@use "utils" as *;
+
+.not-found {
+  position: relative;
+  overflow: hidden;
   min-height: 100vh;
-  width: 100%;
-  background: #f5f7fb;
+  padding: 0 !important;
 
-  &__card {
-    width: min(100% - 2rem, 28rem);
+  .container {
+    min-height: min-max(460, 640);
+    justify-content: center;
+    padding-block: 0px;
   }
 
-  &__content {
-    padding-top: 1.5rem;
+  &__inner {
+    width: 100%;
+    max-width: min-max(620, 880);
+    margin-inline: auto;
+    text-align: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: var(--shadow-sm);
+    padding: min-max(28, 56) min-max(20, 72);
   }
 
-  &__title-row {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    margin-bottom: 0.95rem;
-  }
-
-  &__icon {
-    width: 2rem;
-    height: 2rem;
-    color: var(--color-danger);
+  &__code {
+    margin: 0;
+    letter-spacing: 0.04em;
+    color: var(--color-accent);
+    text-shadow: 0 12px 24px rgba(216, 169, 61, 0.2);
+    font-size: min-max(50, 120);
   }
 
   &__title {
-    font-family: var(--font-roboto);
-    color: #0f1723;
-    font-size: 1.5rem;
-    font-weight: 700;
+    margin-top: min-max(12, 24);
   }
 
-  &__description {
-    margin-top: 0.8rem;
-    color: #576575;
-    font-size: 0.9rem;
+  &__text {
+    margin-top: min-max(12, 24);
+    color: var(--color-muted-foreground);
+    line-height: 160%;
+    max-width: 34em;
+    margin-inline: auto;
+    font-weight: 400;
   }
+
+  &__actions {
+    margin-top: min-max(24, 48);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: min-max(16, 24);
+
+    .cta.stroke {
+      color: var(--color-main);
+    }
+  }
+
+  @include mq-max-768 {
+    &__inner {
+      border-radius: var(--radius-md);
+    }
+
+    &__actions {
+      flex-direction: column;
+
+      .cta {
+        width: 100%;
+      }
+    }
+  }
+}
+
+header,
+footer {
+  display: none !important;
 }
