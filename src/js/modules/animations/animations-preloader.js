@@ -2,7 +2,7 @@ import { gsap } from "gsap/all";
 
 export default function preLoader(docElement, cb = () => {}) {
   const preloader = document.querySelector(".preloader");
-  const logo = preloader.querySelector("svg");
+  const logo = preloader?.querySelector("svg");
   const homeLogo = document.querySelector("[data-home-logo]");
 
   function checkIsLoaded() {
@@ -11,23 +11,25 @@ export default function preLoader(docElement, cb = () => {}) {
   }
 
   window.addEventListener("load", () => {
+    if (!preloader) {
+      checkIsLoaded();
+      return;
+    }
     const tl = gsap.timeline();
 
-    tl.to(logo, {
-      opacity: 1,
-      duration: 0.5,
-    });
+    tl.to(logo, { opacity: 1, duration: 0.3 });
     tl.pause();
 
     const hidePreloader = () => {
+      const delay = homeLogo ? 0.5 : 0.3;
       gsap.to(preloader, {
         autoAlpha: 0,
-        duration: 0.8,
-        delay: 0.5,
+        duration: delay + 0.2,
+        delay: delay,
       });
       gsap.to([], {
-        duration: 0.5,
-        delay: 0.5,
+        duration: delay,
+        delay: delay,
         onComplete: checkIsLoaded,
       });
     };

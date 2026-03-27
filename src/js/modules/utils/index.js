@@ -1,7 +1,9 @@
+let activePopup = null;
+
 // Detect if a link's href goes to the current page
 export function isHash(link) {
   const current = window.location;
-  return (link.href.split('#')[0] === current.href.split('#')[0]) && link.hash;
+  return link.href.split("#")[0] === current.href.split("#")[0] && link.hash;
 }
 
 export function debounce(func, wait, immediate = false) {
@@ -64,7 +66,7 @@ export function lazyLoader() {
       {
         root: null,
         rootMargin: `${window.innerHeight}px`,
-      }
+      },
     );
 
     lazyElements.forEach((element) => {
@@ -90,7 +92,7 @@ export function lazyLoader() {
           function () {
             el.isLoaded = true;
           },
-          { once: true }
+          { once: true },
         );
         el.load();
       }
@@ -110,4 +112,62 @@ export function handleGoBack() {
         }
       });
     });
+}
+
+function onEscPress(e) {
+  if (e.key === "Escape") {
+    handlePopUp.close();
+  }
+}
+function onDocClick(e) {
+  const target = e.target;
+
+  if (
+    activePopup &&
+    activePopup.classList.contains("super-menu") &&
+    !activePopup.contains(target)
+  ) {
+    handlePopUp.close();
+    return;
+  }
+  const isCloseElement = target.dataset.popupClose;
+
+  (isCloseElement || isCloseElement !== undefined) && handlePopUp.close();
+}
+export const handlePopUp = {
+  success: document.querySelector(".popup.popup-message"),
+
+  open: (popup) => {
+    const open = () => {
+      popup.removeAttribute("inert");
+      const scroller = popup.querySelector("[data-scroller]");
+      activePopup = popup;
+      popup.classList.add("active");
+      scroller && scroller.scrollTo(0, 0);
+
+      document.addEventListener("keydown", onEscPress);
+      document.addEventListener("click", onDocClick);
+      // stopScroll(300);
+    };
+    setTimeout(open, activePopup ? 300 : 0);
+    handlePopUp.close();
+  },
+  close: () => {
+    if (!activePopup) return;
+    activePopup.classList.remove("active");
+    activePopup.setAttribute("inert", "");
+    document.removeEventListener("keydown", onEscPress);
+    document.removeEventListener("click", onDocClick);
+    // startScroll();
+    activePopup = null;
+  },
+  message: (message = {}) => {
+    let popup = handlePopUp.success;
+    if (!popup) return;
+    const { title } = message;
+    const titleElement = popup.querySelector("[data-popup-title]");
+
+    titleElement.innerHTML = title;
+    handlePopUp.open(popup);
+  },
 };

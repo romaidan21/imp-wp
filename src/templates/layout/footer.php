@@ -12,6 +12,9 @@ $menu = wp_nav_menu([
 $args = get_field('footer', 'options');
 
 
+$popups = [
+  'popup-messages',
+]
 ?>
 
 
@@ -72,3 +75,9 @@ $args = get_field('footer', 'options');
     </div>
   </div>
 </footer>
+
+<?php
+foreach ($popups as $popup) {
+  renderComponent($popup);
+}
+?>

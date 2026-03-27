@@ -16,7 +16,119 @@
 }
 // Hide hidden fields in forms
 form {
-  .hidden-fields-container{
+  .hidden-fields-container {
     display: none !important;
+  }
+}
+
+.popup {
+  --close: currentColor;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    opacity var(--transition),
+    transform var(--transition);
+  color: var(--content-content);
+
+  .back-close {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background: var(--color-main-gradient);
+  }
+
+  .overflow {
+    @include no-scrollbar;
+    overflow-y: scroll;
+    max-height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-inline: min-max(24, 48);
+  }
+
+  .popup-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    padding: min-max(46, 60) min-max(16, 32) min-max(32, 64);
+    gap: min-max(32, 48);
+    width: 100%;
+    border-radius: min-max(8, 12);
+    box-shadow: var(--shadow-md);
+
+    @include mq-max-768 {
+      min-height: 50vh;
+      justify-content: center;
+    }
+  }
+
+  .close {
+    position: absolute;
+    z-index: 2;
+    left: calc(100% + min-max(30, 54));
+    top: 0;
+
+    * {
+      pointer-events: none !important;
+    }
+
+    @include mq-max-1080 {
+      position: fixed;
+      top: 14px;
+      left: auto;
+      right: 14px;
+    }
+  }
+
+  .form-close {
+    position: absolute;
+    width: 24px;
+    aspect-ratio: 1;
+    top: min-max(16, 24);
+    right: min-max(16, 32);
+    background: currentColor;
+    mask: url("../img/close.svg") center/cover no-repeat;
+    z-index: 3;
+
+    @include on-hover {
+      background: var(--color-danger);
+    }
+  }
+
+  &:not(.active) {
+    opacity: 0;
+    pointer-events: none;
+    * {
+      pointer-events: none !important;
+    }
+  }
+}
+
+.popup-message {
+  .popup-content {
+    max-width: min-max(500, 588);
+    text-align: center;
+    align-items: center;
+  }
+
+  .title {
+    gap: min-max(12, 16);
+
+    p {
+      font-weight: 600;
+      line-height: 100%;
+    }
+
+    p:not(:first-child) {
+      font-size: min-max(16, 20);
+      font-weight: 500;
+    }
   }
 }

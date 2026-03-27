@@ -52,7 +52,7 @@ $args = get_field('footer', 'options');
         </div>
       </div>
 
-      <div class="form-card" data-fade='up'>
+      <div class="form-card" data-fade='up' data-form>
         <?php echo do_shortcode('[contact-form-7 id="01eca0d"]') ?>
       </div>
     </div>

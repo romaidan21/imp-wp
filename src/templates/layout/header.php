@@ -11,6 +11,10 @@ $menu = wp_nav_menu([
 
 ?>
 
+<div class="preloader">
+  <?php renderSVG('img/logo') ?>
+</div>
+
 <header class="header" data-theme="dark">
   <div class="container">
     <?php renderLogo(false) ?>
