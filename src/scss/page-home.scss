@@ -21,7 +21,7 @@
     width: 100%;
     max-width: min-max(500, 600);
     opacity: 0.8;
-    margin-top: min-max(16, 32);
+    margin-top: min-max(24, 40);
   }
 
   .media {
@@ -33,6 +33,24 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg, rgba(28, 67, 107, 0.95) 10%, rgba(28, 67, 107, 0.9) 20%, rgba(22, 55, 87, 0.94) 100%);
+    }
+  }
+
+  h1 {
+    font-weight: 500;
+    line-height: 100%;
+    font-size: min-max(26, 56);
+
+    strong {
+      font-weight: 800;
+      font-size: 135%;
+      letter-spacing: 0.02em;
+    }
+    mark {
+      font-size: 80%;
+      line-height: 170%;
+      transform: translateY(-7%);
+      display: inline-block;
     }
   }
 

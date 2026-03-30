@@ -17,7 +17,7 @@ $button_2 = $args['button_2'] ?? null;
   <div class="container " data-stagger='fadeup'>
     <div class="main-logo" data-home-logo></div>
     <?php if ($title): ?>
-      <h1 class="font-72" data-item><?php echo $title ?></h1>
+      <div class="font-72" data-item><?php echo $title ?></div>
     <?php endif; ?>
     <?php if ($supertitle): ?>
       <div data-item>
@@ -26,6 +26,7 @@ $button_2 = $args['button_2'] ?? null;
       </div>
     <?php endif; ?>
     <div class="actions" data-item>
+
       <?php if ($button && isset($button['url'], $button['title'])): ?>
         <a href="<?php echo $button['url'] ?>" class="cta gold"><?php echo $button['title'] ?></a>
       <?php endif; ?>

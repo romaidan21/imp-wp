@@ -29,6 +29,7 @@ const staggers = [...body.querySelectorAll("[data-stagger]")];
 export default function animationsController() {
   preLoader(html, () => {
     initializeAnimations();
+    createCornerButtons();
   });
 
   // Combined function for all animations and ScrollTriggers
@@ -229,4 +230,74 @@ export default function animationsController() {
     // coverSections.length && coverSections.forEach(animateCoverScroll);
     // revealCollapsed.length && revealCollapsed.forEach(animateRevealCollapse);
   }
+}
+
+function createCornerButtons() {
+  if (!document.body || document.querySelector("[data-button-panel]")) return;
+
+  const panel = document.createElement("div");
+  panel.dataset.buttonPanel = "";
+  panel.className = "corner-button-panel";
+
+  const style = document.createElement("style");
+  style.dataset.buttonPanelStyle = "";
+  style.textContent = `
+    .corner-button-panel {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      display: flex;
+      gap: 8px;
+      z-index: 9999;
+    }
+
+    .corner-button-panel__btn {
+      height: 38px;
+      padding-inline: 8px;
+      border: 0;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.9);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      opacity: 0.85;
+    }
+
+    .corner-button-panel__btn:hover {
+      transform: translateY(-2px);
+      opacity: 1;
+    }
+
+    .corner-button-panel__btn.is-active {
+      background: #2563eb;
+      opacity: 1;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.5);
+      pointer-events: none;
+    }
+  `;
+
+  const buttons = [];
+
+  const onClick = (value, clicked) => {
+    document.body.dataset.button = String(value);
+    buttons.forEach((btn) => btn.classList.remove("is-active"));
+    clicked.classList.add("is-active");
+  };
+
+  [1, 2, 3].forEach((number) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "corner-button-panel__btn";
+    button.textContent = "Колір -" + String(number);
+    button.addEventListener("click", () => onClick(number, button));
+    buttons.push(button);
+    panel.append(button);
+    number === 1 && button.click();
+  });
+
+  document.head.append(style);
+  document.body.append(panel);
 }

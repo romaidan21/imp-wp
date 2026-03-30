@@ -1,6 +1,7 @@
 @use "utils" as *;
 
 .cta {
+  --gold-bg: var(--light-1);
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -9,19 +10,31 @@
   font-size: min-max(15, 18);
   padding: min-max(12, 16) min-max(16, 32);
   border-radius: min-max(6, 8);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
 
   &.empty {
     padding: 0;
   }
 
   &.gold {
-    background: var(--color-accent);
     color: var(--color-main);
-    border: 1px solid var(--color-accent);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--gold-bg);
+      z-index: -1;
+      transition: transform var(--transition);
+      transform-origin: right;
+    }
 
     @include on-hover {
-      background: var(--color-accent-soft);
-      border-color: var(--color-accent-soft);
+      &::before {
+        transform: scale(2);
+      }
     }
   }
 
@@ -31,6 +44,23 @@
     @include on-hover {
       background: var(--color-main);
       color: var(--color-white);
+      border-color: var(--color-main);
     }
+  }
+}
+
+[data-button="1"] {
+  .cta {
+    --gold-bg: var(--light-1);
+  }
+}
+[data-button="2"] {
+  .cta {
+    --gold-bg: var(--light-2);
+  }
+}
+[data-button="3"] {
+  .cta {
+    --gold-bg: var(--light-3);
   }
 }
