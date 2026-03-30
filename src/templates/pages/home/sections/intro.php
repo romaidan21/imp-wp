@@ -17,7 +17,7 @@ $button_2 = $args['button_2'] ?? null;
   <div class="container " data-stagger='fadeup'>
     <div class="main-logo" data-home-logo></div>
     <?php if ($title): ?>
-      <div class="font-72" data-item><?php echo $title ?></div>
+      <div class="font-72"><?php echo $title ?></div>
     <?php endif; ?>
     <?php if ($supertitle): ?>
       <div data-item>
