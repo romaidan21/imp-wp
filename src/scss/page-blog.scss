@@ -37,9 +37,10 @@
       }
 
       &.active {
-        color: #ffffff;
+        color: var(--color-white);
         background: var(--color-main);
         font-weight: 600;
+        pointer-events: none;
       }
     }
   }

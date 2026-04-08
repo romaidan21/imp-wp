@@ -3,7 +3,7 @@
 .footer {
   display: flex;
   justify-content: center;
-  background: linear-gradient(180deg, #15304b 0%, #132b43 100%);
+  background: var(--color-main);
   color: var(--color-white);
   font-family: var(--font-mont);
 

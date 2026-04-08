@@ -57,7 +57,7 @@
     padding-top: 0;
     .section-heading {
       border-radius: min-max(12, 24);
-      background: var(--color-main-gradient);
+      background: var(--color-main);
       padding: min-max(32, 60) min-max(16, 32);
       gap: min-max(12, 24);
 
@@ -87,7 +87,7 @@
     font-weight: 400;
     font-style: normal;
     font-variation-settings: "wdth" 100;
-    color: var(--color-main-dark);
+    color: var(--color-main);
 
     a {
       color: var(--color-main);

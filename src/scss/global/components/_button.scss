@@ -1,7 +1,7 @@
 @use "utils" as *;
 
 .cta {
-  --gold-bg: var(--light-1);
+  --gold-bg: var(--light-2);
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -46,21 +46,5 @@
       color: var(--color-white);
       border-color: var(--color-main);
     }
-  }
-}
-
-[data-button="1"] {
-  .cta {
-    --gold-bg: var(--light-1);
-  }
-}
-[data-button="2"] {
-  .cta {
-    --gold-bg: var(--light-2);
-  }
-}
-[data-button="3"] {
-  .cta {
-    --gold-bg: var(--light-3);
   }
 }

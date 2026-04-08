@@ -1,7 +1,7 @@
 @use "utils" as *;
 
 .header {
-  --bg: transparent;
+  --bg: var(--color-white);
   background: var(--bg);
   position: fixed;
   top: 0;
@@ -20,12 +20,8 @@
     transform: translateY(0);
   }
 
-  &.blurred {
-    --bg: var(--color-white);
-
-    &[data-theme] {
-      --bg: var(--color-main);
-    }
+  &[data-theme] {
+    --bg: var(--color-main);
   }
 
   .container {
